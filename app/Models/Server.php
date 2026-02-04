@@ -328,18 +328,6 @@ class Server extends Model
     }
 
     /**
-     * Returns the location that a server belongs to.
-     *
-     * @return \Znck\Eloquent\Relations\BelongsToThrough<\Pterodactyl\Models\Location, \Pterodactyl\Models\Node>
-     *
-     * @throws \Exception
-     */
-    public function location(): \Znck\Eloquent\Relations\BelongsToThrough
-    {
-        return $this->belongsToThrough(Location::class, Node::class); // @phpstan-ignore return.type
-    }
-
-    /**
      * Returns the associated server transfer.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasOne<\Pterodactyl\Models\ServerTransfer, $this>

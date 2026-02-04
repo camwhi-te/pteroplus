@@ -16,7 +16,7 @@ class NodeController extends Controller
     public function index(Request $request): View
     {
         $nodes = QueryBuilder::for(
-            Node::query()->with('location')->withCount('servers')
+            Node::query()->withCount('servers')
         )
             ->allowedFilters(['uuid', 'name'])
             ->allowedSorts(['id'])

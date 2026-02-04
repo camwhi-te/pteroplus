@@ -5,7 +5,6 @@ namespace Pterodactyl\Http\Controllers\Admin\Servers;
 use Illuminate\View\View;
 use Pterodactyl\Models\Nest;
 use Pterodactyl\Models\Node;
-use Pterodactyl\Models\Location;
 use Illuminate\Http\RedirectResponse;
 use Prologue\Alerts\AlertsMessageBag;
 use Pterodactyl\Http\Controllers\Controller;

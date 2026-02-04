@@ -3,7 +3,6 @@
 namespace Pterodactyl\Transformers\Api\Application;
 
 use Pterodactyl\Models\Node;
-use League\Fractal\Resource\Item;
 use League\Fractal\Resource\Collection;
 use League\Fractal\Resource\NullResource;
 use Pterodactyl\Services\Acl\Api\AdminAcl;
@@ -13,7 +12,7 @@ class NodeTransformer extends BaseTransformer
     /**
      * List of resources that can be included.
      */
-    protected array $availableIncludes = ['allocations', 'location', 'servers'];
+    protected array $availableIncludes = ['allocations', 'servers'];
 
     /**
      * Return the resource name for the JSONAPI output.
@@ -51,7 +50,7 @@ class NodeTransformer extends BaseTransformer
     }
 
     /**
-     * Return the nodes associated with this location.
+     * Return the allocations associated with this node.
      *
      * @throws \Pterodactyl\Exceptions\Transformer\InvalidTransformerLevelException
      */
@@ -71,27 +70,7 @@ class NodeTransformer extends BaseTransformer
     }
 
     /**
-     * Return the nodes associated with this location.
-     *
-     * @throws \Pterodactyl\Exceptions\Transformer\InvalidTransformerLevelException
-     */
-    public function includeLocation(Node $node): Item|NullResource
-    {
-        if (!$this->authorize(AdminAcl::RESOURCE_LOCATIONS)) {
-            return $this->null();
-        }
-
-        $node->loadMissing('location');
-
-        return $this->item(
-            $node->getRelation('location'),
-            $this->makeTransformer(LocationTransformer::class),
-            'location'
-        );
-    }
-
-    /**
-     * Return the nodes associated with this location.
+     * Return the servers associated with this node.
      *
      * @throws \Pterodactyl\Exceptions\Transformer\InvalidTransformerLevelException
      */

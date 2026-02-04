@@ -44,7 +44,6 @@ class MakeNodeCommand extends Command
     {
         $data['name'] = $this->option('name') ?? $this->ask('Enter a short identifier used to distinguish this node from others');
         $data['description'] = $this->option('description') ?? $this->ask('Enter a description to identify the node');
-        $data['location_id'] = $this->option('locationId') ?? $this->ask('Enter a valid location id');
         $data['scheme'] = $this->option('scheme') ?? $this->anticipate(
             'Please either enter https for SSL or http for a non-ssl connection',
             ['https', 'http'],

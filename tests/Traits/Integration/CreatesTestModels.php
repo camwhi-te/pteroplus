@@ -8,7 +8,6 @@ use Pterodactyl\Models\Node;
 use Pterodactyl\Models\User;
 use Pterodactyl\Models\Server;
 use Pterodactyl\Models\Subuser;
-use Pterodactyl\Models\Location;
 use Pterodactyl\Models\Allocation;
 
 trait CreatesTestModels
@@ -33,12 +32,6 @@ trait CreatesTestModels
         }
 
         if (!isset($attributes['node_id'])) {
-            if (!isset($attributes['location_id'])) {
-                /** @var Location $location */
-                $location = Location::factory()->create();
-                $attributes['location_id'] = $location->id;
-            }
-
             /** @var Node $node */
             $node = Node::factory()->create(['location_id' => $attributes['location_id']]);
             $attributes['node_id'] = $node->id;

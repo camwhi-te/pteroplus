@@ -60,7 +60,7 @@ class DeployServerDatabaseServiceTest extends IntegrationTestCase
     {
         $server = $this->createServerModel();
 
-        $node = Node::factory()->create(['location_id' => $server->location->id]);
+        $node = Node::factory()->create();
         DatabaseHost::factory()->create(['node_id' => $node->id]);
 
         config()->set('pterodactyl.client_features.databases.allow_random', false);
@@ -95,7 +95,7 @@ class DeployServerDatabaseServiceTest extends IntegrationTestCase
     {
         $server = $this->createServerModel();
 
-        $node = Node::factory()->create(['location_id' => $server->location->id]);
+        $node = Node::factory()->create();
         DatabaseHost::factory()->create(['node_id' => $node->id]);
         $host = DatabaseHost::factory()->create(['node_id' => $server->node_id]);
 
@@ -122,7 +122,7 @@ class DeployServerDatabaseServiceTest extends IntegrationTestCase
     {
         $server = $this->createServerModel();
 
-        $node = Node::factory()->create(['location_id' => $server->location->id]);
+        $node = Node::factory()->create();
         $host = DatabaseHost::factory()->create(['node_id' => $node->id]);
 
         $this->managementService->expects('create')->with($server, [

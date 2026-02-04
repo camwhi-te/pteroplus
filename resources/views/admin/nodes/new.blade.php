@@ -32,14 +32,6 @@
                         <textarea name="description" id="pDescription" rows="4" class="form-control">{{ old('description') }}</textarea>
                     </div>
                     <div class="form-group">
-                        <label for="pLocationId" class="form-label">Location</label>
-                        <select name="location_id" id="pLocationId">
-                            @foreach($locations as $location)
-                                <option value="{{ $location->id }}" {{ $location->id != old('location_id') ?: 'selected' }}>{{ $location->short }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="form-group">
                         <label class="form-label">Node Visibility</label>
                         <div>
                             <div class="radio radio-success radio-inline">

@@ -15,18 +15,6 @@ class FindViableNodesService
     protected ?int $memory = null;
 
     /**
-     * Set the locations that should be searched through to locate available nodes.
-     */
-    public function setLocations(array $locations): self
-    {
-        Assert::allIntegerish($locations, 'An array of location IDs should be provided when calling setLocations.');
-
-        $this->locations = $locations;
-
-        return $this;
-    }
-
-    /**
      * Set the amount of disk that will be used by the server being created. Nodes will be
      * filtered out if they do not have enough available free disk space for this server
      * to be placed on.

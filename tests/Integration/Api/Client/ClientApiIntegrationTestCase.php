@@ -9,7 +9,6 @@ use Pterodactyl\Models\Model;
 use Pterodactyl\Models\Backup;
 use Pterodactyl\Models\Server;
 use Pterodactyl\Models\Database;
-use Pterodactyl\Models\Location;
 use Pterodactyl\Models\Schedule;
 use Illuminate\Support\Collection;
 use Pterodactyl\Models\Allocation;

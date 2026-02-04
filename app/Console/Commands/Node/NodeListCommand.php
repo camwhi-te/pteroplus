@@ -11,12 +11,11 @@ class NodeListCommand extends Command
 
     public function handle(): int
     {
-        $nodes = Node::query()->with('location')->get()->map(function (Node $node) {
+        $nodes = Node::query()->get()->map(function (Node $node) {
             return [
                 'id' => $node->id,
                 'uuid' => $node->uuid,
                 'name' => $node->name,
-                'location' => $node->location->short,
                 'host' => $node->getConnectionAddress(),
             ];
         });

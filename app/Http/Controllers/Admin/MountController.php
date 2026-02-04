@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 use Pterodactyl\Models\Nest;
 use Illuminate\Http\Response;
 use Pterodactyl\Models\Mount;
-use Pterodactyl\Models\Location;
 use Illuminate\Http\RedirectResponse;
 use Prologue\Alerts\AlertsMessageBag;
 use Illuminate\View\Factory as ViewFactory;
@@ -78,7 +77,7 @@ class MountController extends Controller
     }
 
     /**
-     * Handle request to update or delete location.
+     * Handle request to update or delete mounts.
      *
      * @throws \Throwable
      */
@@ -96,7 +95,7 @@ class MountController extends Controller
     }
 
     /**
-     * Delete a location from the system.
+     * Delete a mount from the system.
      *
      * @throws \Exception
      */

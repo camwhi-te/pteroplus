@@ -23,7 +23,6 @@ class ServerTransformer extends BaseTransformer
         'nest',
         'egg',
         'variables',
-        'location',
         'node',
         'databases',
         'transfer',
@@ -185,22 +184,6 @@ class ServerTransformer extends BaseTransformer
         $server->loadMissing('variables');
 
         return $this->collection($server->getRelation('variables'), $this->makeTransformer(ServerVariableTransformer::class), 'server_variable');
-    }
-
-    /**
-     * Return a generic array with location information for this server.
-     *
-     * @throws \Pterodactyl\Exceptions\Transformer\InvalidTransformerLevelException
-     */
-    public function includeLocation(Server $server): Item|NullResource
-    {
-        if (!$this->authorize(AdminAcl::RESOURCE_LOCATIONS)) {
-            return $this->null();
-        }
-
-        $server->loadMissing('location');
-
-        return $this->item($server->getRelation('location'), $this->makeTransformer(LocationTransformer::class), 'location');
     }
 
     /**

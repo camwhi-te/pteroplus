@@ -73,26 +73,6 @@ class NodeRepository extends EloquentRepository implements NodeRepositoryInterfa
     }
 
     /**
-     * Return a single node with location and server information.
-     */
-    public function loadLocationAndServerCount(Node $node, bool $refresh = false): Node
-    {
-        if (!$node->relationLoaded('location') || $refresh) {
-            $node->load('location');
-        }
-
-        // This is quite ugly and can probably be improved down the road.
-        // And by probably, I mean it should.
-        if (is_null($node->servers_count) || $refresh) {
-            $node->load('servers');
-            $node->setRelation('servers_count', count($node->getRelation('servers')));
-            unset($node->servers);
-        }
-
-        return $node;
-    }
-
-    /**
      * Attach a paginated set of allocations to a node mode including
      * any servers that are also attached to those allocations.
      */

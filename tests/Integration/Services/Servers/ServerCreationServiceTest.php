@@ -9,7 +9,6 @@ use Pterodactyl\Models\Node;
 use Pterodactyl\Models\User;
 use GuzzleHttp\Psr7\Response;
 use Pterodactyl\Models\Server;
-use Pterodactyl\Models\Location;
 use Pterodactyl\Models\Allocation;
 use Illuminate\Foundation\Testing\WithFaker;
 use GuzzleHttp\Exception\BadResponseException;
@@ -57,20 +56,15 @@ class ServerCreationServiceTest extends IntegrationTestCase
         /** @var User $user */
         $user = User::factory()->create();
 
-        /** @var Location $location */
-        $location = Location::factory()->create();
-
         /** @var Node $node */
-        $node = Node::factory()->create([
-            'location_id' => $location->id,
-        ]);
+        $node = Node::factory()->create();
 
         /** @var \Pterodactyl\Models\Allocation[]|\Illuminate\Database\Eloquent\Collection $allocations */
         $allocations = Allocation::factory()->times(5)->create([
             'node_id' => $node->id,
         ]);
 
-        $deployment = (new DeploymentObject())->setDedicated(true)->setLocations([$node->location_id])->setPorts([
+        $deployment = (new DeploymentObject())->setDedicated(true)->setPorts([
             $allocations[0]->port,
         ]);
 
@@ -159,13 +153,8 @@ class ServerCreationServiceTest extends IntegrationTestCase
         /** @var User $user */
         $user = User::factory()->create();
 
-        /** @var Location $location */
-        $location = Location::factory()->create();
-
         /** @var Node $node */
-        $node = Node::factory()->create([
-            'location_id' => $location->id,
-        ]);
+        $node = Node::factory()->create();
 
         /** @var Allocation $allocation */
         $allocation = Allocation::factory()->create([
