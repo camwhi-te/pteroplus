@@ -11,7 +11,6 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Builder;
 use Pterodactyl\Models\Traits\HasAccessTokens;
 use Illuminate\Auth\Passwords\CanResetPassword;
-use Pterodactyl\Traits\Helpers\AvailableLanguages;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -33,7 +32,6 @@ use Pterodactyl\Notifications\SendPasswordReset as ResetPasswordNotification;
  * @property string|null $name_last
  * @property string $password
  * @property string|null $remember_token
- * @property string $language
  * @property bool $root_admin
  * @property bool $use_totp
  * @property string|null $totp_secret
@@ -86,7 +84,6 @@ class User extends Model implements
 {
     use Authenticatable;
     use Authorizable;
-    use AvailableLanguages;
     use CanResetPassword;
     /** @use \Pterodactyl\Models\Traits\HasAccessTokens<\Pterodactyl\Models\ApiKey> */
     use HasAccessTokens;
@@ -123,7 +120,6 @@ class User extends Model implements
         'name_first',
         'name_last',
         'password',
-        'language',
         'use_totp',
         'totp_secret',
         'totp_authenticated_at',
@@ -152,7 +148,6 @@ class User extends Model implements
     protected $attributes = [
         'external_id' => null,
         'root_admin' => false,
-        'language' => 'en',
         'use_totp' => false,
         'totp_secret' => null,
     ];
@@ -169,7 +164,6 @@ class User extends Model implements
         'name_last' => 'required|string|between:1,191',
         'password' => 'sometimes|nullable|string',
         'root_admin' => 'boolean',
-        'language' => 'string',
         'use_totp' => 'boolean',
         'totp_secret' => 'nullable|string',
     ];
@@ -182,7 +176,6 @@ class User extends Model implements
     {
         $rules = parent::getRules();
 
-        $rules['language'][] = new In(array_keys((new self())->getAvailableLanguages()));
         $rules['username'][] = new Username();
 
         return $rules;

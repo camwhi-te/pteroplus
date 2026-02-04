@@ -13,9 +13,7 @@ use Spatie\QueryBuilder\QueryBuilder;
 use Illuminate\View\Factory as ViewFactory;
 use Pterodactyl\Exceptions\DisplayException;
 use Pterodactyl\Http\Controllers\Controller;
-use Illuminate\Contracts\Translation\Translator;
 use Pterodactyl\Services\Users\UserUpdateService;
-use Pterodactyl\Traits\Helpers\AvailableLanguages;
 use Pterodactyl\Services\Users\UserCreationService;
 use Pterodactyl\Services\Users\UserDeletionService;
 use Pterodactyl\Http\Requests\Admin\UserFormRequest;
@@ -24,8 +22,6 @@ use Pterodactyl\Contracts\Repository\UserRepositoryInterface;
 
 class UserController extends Controller
 {
-    use AvailableLanguages;
-
     /**
      * UserController constructor.
      */
@@ -33,7 +29,6 @@ class UserController extends Controller
         protected AlertsMessageBag $alert,
         protected UserCreationService $creationService,
         protected UserDeletionService $deletionService,
-        protected Translator $translator,
         protected UserUpdateService $updateService,
         protected UserRepositoryInterface $repository,
         protected ViewFactory $view,
@@ -66,9 +61,7 @@ class UserController extends Controller
      */
     public function create(): View
     {
-        return view('admin.users.new', [
-            'languages' => $this->getAvailableLanguages(true),
-        ]);
+        return view('admin.users.new');
     }
 
     /**
@@ -78,7 +71,6 @@ class UserController extends Controller
     {
         return view('admin.users.view', [
             'user' => $user,
-            'languages' => $this->getAvailableLanguages(true),
         ]);
     }
 
@@ -91,7 +83,7 @@ class UserController extends Controller
     public function delete(Request $request, User $user): RedirectResponse
     {
         if ($request->user()->is($user)) {
-            throw new DisplayException(__('admin/user.exceptions.delete_self'));
+            throw new DisplayException(trans('admin/user.exceptions.delete_self'));
         }
 
         $this->deletionService->handle($user);
@@ -108,7 +100,7 @@ class UserController extends Controller
     public function store(NewUserFormRequest $request): RedirectResponse
     {
         $user = $this->creationService->handle($request->normalize());
-        $this->alert->success($this->translator->get('admin/user.notices.account_created'))->flash();
+        $this->alert->success(trans('admin/user.notices.account_created'))->flash();
 
         return redirect()->route('admin.users.view', $user->id);
     }
