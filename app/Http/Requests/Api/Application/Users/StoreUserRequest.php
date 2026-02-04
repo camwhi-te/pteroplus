@@ -24,12 +24,8 @@ class StoreUserRequest extends ApplicationApiRequest
             'email',
             'username',
             'password',
-            'language',
             'root_admin',
         ])->toArray();
-
-        $response['first_name'] = $rules['name_first'];
-        $response['last_name'] = $rules['name_last'];
 
         return $response;
     }
@@ -37,11 +33,6 @@ class StoreUserRequest extends ApplicationApiRequest
     public function validated($key = null, $default = null): array
     {
         $data = parent::validated();
-
-        $data['name_first'] = $data['first_name'];
-        $data['name_last'] = $data['last_name'];
-
-        unset($data['first_name'], $data['last_name']);
 
         return $data;
     }
@@ -53,8 +44,6 @@ class StoreUserRequest extends ApplicationApiRequest
     {
         return [
             'external_id' => 'Third Party Identifier',
-            'name_first' => 'First Name',
-            'name_last' => 'Last Name',
             'root_admin' => 'Root Administrator Status',
         ];
     }

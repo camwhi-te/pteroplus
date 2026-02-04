@@ -28,8 +28,6 @@ use Pterodactyl\Notifications\SendPasswordReset as ResetPasswordNotification;
  * @property string $uuid
  * @property string $username
  * @property string $email
- * @property string|null $name_first
- * @property string|null $name_last
  * @property string $password
  * @property string|null $remember_token
  * @property bool $root_admin
@@ -63,8 +61,6 @@ use Pterodactyl\Notifications\SendPasswordReset as ResetPasswordNotification;
  * @method static Builder|User whereGravatar($value)
  * @method static Builder|User whereId($value)
  * @method static Builder|User whereLanguage($value)
- * @method static Builder|User whereNameFirst($value)
- * @method static Builder|User whereNameLast($value)
  * @method static Builder|User wherePassword($value)
  * @method static Builder|User whereRememberToken($value)
  * @method static Builder|User whereRootAdmin($value)
@@ -117,8 +113,6 @@ class User extends Model implements
         'external_id',
         'username',
         'email',
-        'name_first',
-        'name_last',
         'password',
         'use_totp',
         'totp_secret',
@@ -160,8 +154,6 @@ class User extends Model implements
         'email' => 'required|email|between:1,191|unique:users,email',
         'external_id' => 'sometimes|nullable|string|max:191|unique:users,external_id',
         'username' => 'required|between:1,191|unique:users,username',
-        'name_first' => 'required|string|between:1,191',
-        'name_last' => 'required|string|between:1,191',
         'password' => 'sometimes|nullable|string',
         'root_admin' => 'boolean',
         'use_totp' => 'boolean',
@@ -210,14 +202,6 @@ class User extends Model implements
     public function setUsernameAttribute(string $value)
     {
         $this->attributes['username'] = mb_strtolower($value);
-    }
-
-    /**
-     * Return a concatenated result for the accounts full name.
-     */
-    public function getNameAttribute(): string
-    {
-        return trim($this->name_first . ' ' . $this->name_last);
     }
 
     /**

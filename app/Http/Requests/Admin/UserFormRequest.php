@@ -18,8 +18,6 @@ class UserFormRequest extends AdminFormRequest
         )->only([
             'email',
             'username',
-            'name_first',
-            'name_last',
             'password',
             'language',
             'root_admin',
