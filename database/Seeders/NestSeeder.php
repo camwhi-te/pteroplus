@@ -41,9 +41,8 @@ class NestSeeder extends Seeder
         ])->keyBy('name')->toArray();
 
         $this->createMinecraftNest(array_get($items, 'Minecraft'));
-        $this->createSourceEngineNest(array_get($items, 'Source Engine'));
-        $this->createVoiceServersNest(array_get($items, 'Voice Servers'));
-        $this->createRustNest(array_get($items, 'Rust'));
+        $this->createAppsNest(array_get($items, 'Apps'));
+        $this->createGamesNest(array_get($items, 'Games'));
     }
 
     /**
@@ -56,52 +55,37 @@ class NestSeeder extends Seeder
         if (is_null($nest)) {
             $this->creationService->handle([
                 'name' => 'Minecraft',
-                'description' => 'Minecraft - the classic game from Mojang. With support for Vanilla MC, Spigot, and many others!',
+                'description' => 'Multiple different variants of Minecraft server options.',
             ], 'support@pterodactyl.io');
         }
     }
 
     /**
-     * Create the Source Engine Games nest to be used later on.
+     * Create the Games nest to be used later on.
      *
      * @throws \Pterodactyl\Exceptions\Model\DataValidationException
      */
-    private function createSourceEngineNest(?array $nest = null)
+    private function createGamesNest(?array $nest = null)
     {
         if (is_null($nest)) {
             $this->creationService->handle([
-                'name' => 'Source Engine',
-                'description' => 'Includes support for most Source Dedicated Server games.',
+                'name' => 'Games',
+                'description' => 'Includes several popular game server options.',
             ], 'support@pterodactyl.io');
         }
     }
 
     /**
-     * Create the Voice Servers nest to be used later on.
+     * Create the Apps nest to be used later on.
      *
      * @throws \Pterodactyl\Exceptions\Model\DataValidationException
      */
-    private function createVoiceServersNest(?array $nest = null)
+    private function createAppsNest(?array $nest = null)
     {
         if (is_null($nest)) {
             $this->creationService->handle([
-                'name' => 'Voice Servers',
-                'description' => 'Voice servers such as Mumble and Teamspeak 3.',
-            ], 'support@pterodactyl.io');
-        }
-    }
-
-    /**
-     * Create the Rust nest to be used later on.
-     *
-     * @throws \Pterodactyl\Exceptions\Model\DataValidationException
-     */
-    private function createRustNest(?array $nest = null)
-    {
-        if (is_null($nest)) {
-            $this->creationService->handle([
-                'name' => 'Rust',
-                'description' => 'Rust - A game where you must fight to survive.',
+                'name' => 'Apps',
+                'description' => 'Useful applications to run via PteroPlus.',
             ], 'support@pterodactyl.io');
         }
     }

@@ -20,9 +20,8 @@ class EggSeeder extends Seeder
      */
     public static array $import = [
         'Minecraft',
-        'Source Engine',
-        'Voice Servers',
-        'Rust',
+        'Apps',
+        'Games',
     ];
 
     /**
