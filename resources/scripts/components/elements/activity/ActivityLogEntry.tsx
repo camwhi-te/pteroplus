@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Tooltip from '@/components/elements/tooltip/Tooltip';
-import Translate from '@/components/elements/Translate';
 import { format, formatDistanceToNowStrict } from 'date-fns';
 import { ActivityLog } from '@definitions/user';
 import ActivityLogMetaButton from '@/components/elements/activity/ActivityLogMetaButton';
@@ -78,7 +77,7 @@ export default ({ activity, children }: Props) => {
                         </div>
                     </div>
                     <p className={style.description}>
-                        <Translate ns={'activity'} values={properties} i18nKey={activity.event.replace(':', '.')} />
+                        {activity.description ?? ''}
                     </p>
                     <div className={'mt-1 flex items-center text-sm'}>
                         {activity.ip && (
