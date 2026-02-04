@@ -4,7 +4,7 @@ import CreateApiKeyForm from '@/components/dashboard/forms/CreateApiKeyForm';
 import getApiKeys, { ApiKey } from '@/api/account/getApiKeys';
 import SpinnerOverlay from '@/components/elements/SpinnerOverlay';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faKey, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { faKey, faStar, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import deleteApiKey from '@/api/account/deleteApiKey';
 import FlashMessageRender from '@/components/FlashMessageRender';
 import { format } from 'date-fns';
@@ -76,6 +76,9 @@ export default () => {
                                         Last used:&nbsp;
                                         {key.lastUsedAt ? format(key.lastUsedAt, 'MMM do, yyyy HH:mm') : 'Never'}
                                     </p>
+                                    {key.identifier.startsWith('ptla_') && (
+                                        <p className={'text-2xs text-neutral-300 uppercase'}><FontAwesomeIcon icon={faStar} className={'mr-1'} />Administrator Key</p>
+                                    )}
                                 </div>
                                 <p css={tw`text-sm ml-4 hidden md:block`}>
                                     <code css={tw`font-mono py-1 px-2 bg-neutral-900 rounded`}>{key.identifier}</code>

@@ -242,8 +242,7 @@ class User extends Model implements
      */
     public function apiKeys(): HasMany
     {
-        return $this->hasMany(ApiKey::class)
-            ->where('key_type', ApiKey::TYPE_ACCOUNT);
+        return $this->hasMany(ApiKey::class);
     }
 
     /**

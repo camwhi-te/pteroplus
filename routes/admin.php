@@ -8,23 +8,6 @@ Route::get('/', [Admin\BaseController::class, 'index'])->name('admin.index');
 
 /*
 |--------------------------------------------------------------------------
-| API Controller Routes
-|--------------------------------------------------------------------------
-|
-| Endpoint: /admin/api
-|
-*/
-Route::group(['prefix' => 'api'], function () {
-    Route::get('/', [Admin\ApiController::class, 'index'])->name('admin.api.index');
-    Route::get('/new', [Admin\ApiController::class, 'create'])->name('admin.api.new');
-
-    Route::post('/new', [Admin\ApiController::class, 'store']);
-
-    Route::delete('/revoke/{identifier}', [Admin\ApiController::class, 'delete'])->name('admin.api.delete');
-});
-
-/*
-|--------------------------------------------------------------------------
 | Database Controller Routes
 |--------------------------------------------------------------------------
 |

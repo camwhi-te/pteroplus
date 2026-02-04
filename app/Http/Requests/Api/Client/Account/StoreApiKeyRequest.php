@@ -5,6 +5,7 @@ namespace Pterodactyl\Http\Requests\Api\Client\Account;
 use IPTools\Range;
 use Pterodactyl\Models\ApiKey;
 use Illuminate\Validation\Validator;
+use Pterodactyl\Services\Acl\Api\AdminAcl;
 use Pterodactyl\Http\Requests\Api\Client\ClientApiRequest;
 
 class StoreApiKeyRequest extends ClientApiRequest
@@ -43,5 +44,12 @@ class StoreApiKeyRequest extends ClientApiRequest
                 }
             }
         });
+    }
+
+    public function getKeyPermissions(): array
+    {
+        return collect($this->all()['permissions'])->filter(function ($value, $key) {
+            return substr($key, 0, strlen(AdminAcl::COLUMN_IDENTIFIER)) === AdminAcl::COLUMN_IDENTIFIER;
+        })->toArray();
     }
 }

@@ -35,6 +35,7 @@ Route::prefix('/account')->middleware(AccountSubject::class)->group(function () 
 
     Route::get('/api-keys', [Client\ApiKeyController::class, 'index']);
     Route::post('/api-keys', [Client\ApiKeyController::class, 'store']);
+    Route::post('/api-keys/application', [Client\ApiKeyController::class, 'storeApplication']);
     Route::delete('/api-keys/{identifier}', [Client\ApiKeyController::class, 'delete']);
 
     Route::prefix('/ssh-keys')->group(function () {
