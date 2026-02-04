@@ -3,6 +3,7 @@
 namespace Pterodactyl\Http\Controllers\Admin;
 
 use Illuminate\View\View;
+use Pterodactyl\Models\Node;
 use Pterodactyl\Models\DatabaseHost;
 use Illuminate\Http\RedirectResponse;
 use Prologue\Alerts\AlertsMessageBag;
@@ -12,7 +13,6 @@ use Pterodactyl\Http\Requests\Admin\DatabaseHostFormRequest;
 use Pterodactyl\Services\Databases\Hosts\HostCreationService;
 use Pterodactyl\Services\Databases\Hosts\HostDeletionService;
 use Pterodactyl\Contracts\Repository\DatabaseRepositoryInterface;
-use Pterodactyl\Contracts\Repository\LocationRepositoryInterface;
 use Pterodactyl\Contracts\Repository\DatabaseHostRepositoryInterface;
 
 class DatabaseController extends Controller
@@ -27,7 +27,6 @@ class DatabaseController extends Controller
         private HostCreationService $creationService,
         private HostDeletionService $deletionService,
         private HostUpdateService $updateService,
-        private LocationRepositoryInterface $locationRepository,
     ) {
     }
 
@@ -37,8 +36,8 @@ class DatabaseController extends Controller
     public function index(): View
     {
         return view('admin.databases.index', [
-            'locations' => $this->locationRepository->getAllWithNodes(),
             'hosts' => $this->repository->getWithViewDetails(),
+            'nodes' => Node::all(),
         ]);
     }
 
@@ -50,7 +49,6 @@ class DatabaseController extends Controller
     public function view(int $host): View
     {
         return view('admin.databases.view', [
-            'locations' => $this->locationRepository->getAllWithNodes(),
             'host' => $this->repository->find($host),
             'databases' => $this->databaseRepository->getDatabasesForHost($host),
         ]);

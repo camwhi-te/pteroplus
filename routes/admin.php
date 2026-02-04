@@ -8,7 +8,7 @@ Route::get('/', [Admin\BaseController::class, 'index'])->name('admin.index');
 
 /*
 |--------------------------------------------------------------------------
-| Location Controller Routes
+| API Controller Routes
 |--------------------------------------------------------------------------
 |
 | Endpoint: /admin/api

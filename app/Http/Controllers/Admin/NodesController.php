@@ -22,7 +22,6 @@ use Pterodactyl\Contracts\Repository\NodeRepositoryInterface;
 use Pterodactyl\Contracts\Repository\ServerRepositoryInterface;
 use Pterodactyl\Http\Requests\Admin\Node\AllocationFormRequest;
 use Pterodactyl\Services\Allocations\AllocationDeletionService;
-use Pterodactyl\Contracts\Repository\LocationRepositoryInterface;
 use Pterodactyl\Contracts\Repository\AllocationRepositoryInterface;
 use Pterodactyl\Http\Requests\Admin\Node\AllocationAliasFormRequest;
 
@@ -39,7 +38,6 @@ class NodesController extends Controller
         protected CacheRepository $cache,
         protected NodeCreationService $creationService,
         protected NodeDeletionService $deletionService,
-        protected LocationRepositoryInterface $locationRepository,
         protected NodeRepositoryInterface $repository,
         protected ServerRepositoryInterface $serverRepository,
         protected NodeUpdateService $updateService,
@@ -51,16 +49,9 @@ class NodesController extends Controller
     /**
      * Displays create new node page.
      */
-    public function create(): View|RedirectResponse
+    public function create(): View
     {
-        $locations = $this->locationRepository->all();
-        if (count($locations) < 1) {
-            $this->alert->warning(trans('admin/node.notices.location_required'))->flash();
-
-            return redirect()->route('admin.locations');
-        }
-
-        return view('admin.nodes.new', ['locations' => $locations]);
+        return view('admin.nodes.new');
     }
 
     /**

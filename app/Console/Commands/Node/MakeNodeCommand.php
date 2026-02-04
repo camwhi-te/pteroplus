@@ -63,6 +63,6 @@ class MakeNodeCommand extends Command
         $data['daemonBase'] = $this->option('daemonBase') ?? $this->ask('Enter the base folder', '/var/lib/pterodactyl/volumes');
 
         $node = $this->creationService->handle($data);
-        $this->line('Successfully created a new node on the location ' . $data['location_id'] . ' with the name ' . $data['name'] . ' and has an id of ' . $node->id . '.');
+        $this->line('Successfully created a new node with the name ' . $data['name'] . ' and has an id of ' . $node->id . '.');
     }
 }

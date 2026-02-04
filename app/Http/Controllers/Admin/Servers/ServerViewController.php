@@ -13,7 +13,6 @@ use Pterodactyl\Repositories\Eloquent\NestRepository;
 use Pterodactyl\Repositories\Eloquent\NodeRepository;
 use Pterodactyl\Repositories\Eloquent\MountRepository;
 use Pterodactyl\Traits\Controllers\JavascriptInjection;
-use Pterodactyl\Repositories\Eloquent\LocationRepository;
 use Pterodactyl\Repositories\Eloquent\DatabaseHostRepository;
 
 class ServerViewController extends Controller
@@ -25,7 +24,6 @@ class ServerViewController extends Controller
      */
     public function __construct(
         private DatabaseHostRepository $databaseHostRepository,
-        private LocationRepository $locationRepository,
         private MountRepository $mountRepository,
         private NestRepository $nestRepository,
         private NodeRepository $nodeRepository,
@@ -135,7 +133,6 @@ class ServerViewController extends Controller
 
         return view('admin.servers.view.manage', [
             'server' => $server,
-            'locations' => $this->locationRepository->all(),
             'canTransfer' => $canTransfer,
         ]);
     }

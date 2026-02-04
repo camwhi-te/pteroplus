@@ -131,7 +131,7 @@
                             <span class="info-box-icon"><i class="ion ion-social-buffer-outline"></i></span>
                             <div class="info-box-content" style="padding: 23px 10px 0;">
                                 <span class="info-box-text">Total Servers</span>
-                                <span class="info-box-number">{{ $node->servers_count }}</span>
+                                <span class="info-box-number">{{ $node->servers->count() }}</span>
                             </div>
                         </div>
                     </div>

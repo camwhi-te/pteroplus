@@ -15,7 +15,6 @@ use Pterodactyl\Http\Controllers\Controller;
 use Pterodactyl\Http\Requests\Admin\MountFormRequest;
 use Pterodactyl\Repositories\Eloquent\MountRepository;
 use Pterodactyl\Contracts\Repository\NestRepositoryInterface;
-use Pterodactyl\Contracts\Repository\LocationRepositoryInterface;
 
 class MountController extends Controller
 {
@@ -25,7 +24,6 @@ class MountController extends Controller
     public function __construct(
         protected AlertsMessageBag $alert,
         protected NestRepositoryInterface $nestRepository,
-        protected LocationRepositoryInterface $locationRepository,
         protected MountRepository $repository,
         protected ViewFactory $view,
     ) {
@@ -54,7 +52,6 @@ class MountController extends Controller
         return view('admin.mounts.view', [
             'mount' => $this->repository->getWithRelations($id),
             'nests' => $nests,
-            'locations' => $locations,
         ]);
     }
 

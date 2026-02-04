@@ -13,7 +13,6 @@ use Pterodactyl\Repositories\Eloquent\ServerRepository;
 use Pterodactyl\Repositories\Eloquent\SessionRepository;
 use Pterodactyl\Repositories\Eloquent\SubuserRepository;
 use Pterodactyl\Repositories\Eloquent\DatabaseRepository;
-use Pterodactyl\Repositories\Eloquent\LocationRepository;
 use Pterodactyl\Repositories\Eloquent\ScheduleRepository;
 use Pterodactyl\Repositories\Eloquent\SettingsRepository;
 use Pterodactyl\Repositories\Eloquent\AllocationRepository;
@@ -52,7 +51,6 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(DatabaseHostRepositoryInterface::class, DatabaseHostRepository::class);
         $this->app->bind(EggRepositoryInterface::class, EggRepository::class);
         $this->app->bind(EggVariableRepositoryInterface::class, EggVariableRepository::class);
-        $this->app->bind(LocationRepositoryInterface::class, LocationRepository::class);
         $this->app->bind(NestRepositoryInterface::class, NestRepository::class);
         $this->app->bind(NodeRepositoryInterface::class, NodeRepository::class);
         $this->app->bind(ScheduleRepositoryInterface::class, ScheduleRepository::class);

@@ -52,7 +52,7 @@ class CreateServerController extends Controller
         ]);
 
         return view('admin.servers.new', [
-            'locations' => Location::all(),
+            'nodes' => Node::all(),
             'nests' => $nests,
         ]);
     }
