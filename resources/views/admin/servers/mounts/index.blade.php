@@ -1,5 +1,6 @@
 
 @extends('layouts.admin')
+@include('partials/admin.servers.nav', ['activeTab' => 'mounts'])
 
 @section('title')
     Mounts
@@ -9,11 +10,13 @@
     <h1>Mounts<small>Configure and manage additional mount points for servers.</small></h1>
     <ol class="breadcrumb">
         <li><a href="{{ route('admin.index') }}">Admin</a></li>
+        <li><a href="{{ route('admin.servers') }}">Servers</a></li>
         <li class="active">Mounts</li>
     </ol>
 @endsection
 
 @section('content')
+    @yield('servers::nav')
     <div class="row">
         <div class="col-xs-12">
             <div class="box box-primary">
@@ -41,7 +44,7 @@
                             @foreach ($mounts as $mount)
                                 <tr>
                                     <td><code>{{ $mount->id }}</code></td>
-                                    <td><a href="{{ route('admin.mounts.view', $mount->id) }}">{{ $mount->name }}</a></td>
+                                    <td><a href="{{ route('admin.servers.mounts.view', $mount->id) }}">{{ $mount->name }}</a></td>
                                     <td><code>{{ $mount->source }}</code></td>
                                     <td><code>{{ $mount->target }}</code></td>
                                     <td class="text-center">{{ $mount->eggs_count }}</td>
@@ -59,7 +62,7 @@
     <div class="modal fade" id="newMountModal" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <form action="{{ route('admin.mounts') }}" method="POST">
+                <form action="{{ route('admin.servers.mounts') }}" method="POST">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true" style="color: #FFFFFF">&times;</span>

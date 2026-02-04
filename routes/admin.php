@@ -146,12 +146,12 @@ Route::group(['prefix' => 'nodes'], function () {
 |
 */
 Route::group(['prefix' => 'mounts'], function () {
-    Route::get('/', [Admin\MountController::class, 'index'])->name('admin.mounts');
-    Route::get('/view/{mount:id}', [Admin\MountController::class, 'view'])->name('admin.mounts.view');
+    Route::get('/', [Admin\MountController::class, 'index'])->name('admin.servers.mounts');
+    Route::get('/view/{mount:id}', [Admin\MountController::class, 'view'])->name('admin.servers.mounts.view');
 
     Route::post('/', [Admin\MountController::class, 'create']);
-    Route::post('/{mount:id}/eggs', [Admin\MountController::class, 'addEggs'])->name('admin.mounts.eggs');
-    Route::post('/{mount:id}/nodes', [Admin\MountController::class, 'addNodes'])->name('admin.mounts.nodes');
+    Route::post('/{mount:id}/eggs', [Admin\MountController::class, 'addEggs'])->name('admin.servers.mounts.eggs');
+    Route::post('/{mount:id}/nodes', [Admin\MountController::class, 'addNodes'])->name('admin.servers.mounts.nodes');
 
     Route::patch('/view/{mount:id}', [Admin\MountController::class, 'update']);
 

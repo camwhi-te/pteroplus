@@ -9,7 +9,7 @@
     <h1>{{ $mount->name }}<small>{{ str_limit($mount->description, 75) }}</small></h1>
     <ol class="breadcrumb">
         <li><a href="{{ route('admin.index') }}">Admin</a></li>
-        <li><a href="{{ route('admin.mounts') }}">Mounts</a></li>
+        <li><a href="{{ route('admin.servers.mounts') }}">Mounts</a></li>
         <li class="active">{{ $mount->name }}</li>
     </ol>
 @endsection
@@ -22,7 +22,7 @@
                     <h3 class="box-title">Mount Details</h3>
                 </div>
 
-                <form action="{{ route('admin.mounts.view', $mount->id) }}" method="POST">
+                <form action="{{ route('admin.servers.mounts.view', $mount->id) }}" method="POST">
                     <div class="box-body">
                         <div class="form-group">
                             <label for="PUniqueID" class="form-label">Unique ID</label>
@@ -165,7 +165,7 @@
     <div class="modal fade" id="addEggsModal" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <form action="{{ route('admin.mounts.eggs', $mount->id) }}" method="POST">
+                <form action="{{ route('admin.servers.mounts.eggs', $mount->id) }}" method="POST">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true" style="color: #FFFFFF">&times;</span>
@@ -209,7 +209,7 @@
     <div class="modal fade" id="addNodesModal" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <form action="{{ route('admin.mounts.nodes', $mount->id) }}" method="POST">
+                <form action="{{ route('admin.servers.mounts.nodes', $mount->id) }}" method="POST">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true" style="color: #FFFFFF">&times;</span>

@@ -34,7 +34,7 @@ class MountController extends Controller
      */
     public function index(): View
     {
-        return view('admin.mounts.index', [
+        return view('admin.servers.mounts.index', [
             'mounts' => $this->repository->getAllWithDetails(),
         ]);
     }
@@ -49,7 +49,7 @@ class MountController extends Controller
         $nests = Nest::query()->with('eggs')->get();
         $locations = Location::query()->with('nodes')->get();
 
-        return view('admin.mounts.view', [
+        return view('admin.servers.mounts.view', [
             'mount' => $this->repository->getWithRelations($id),
             'nests' => $nests,
         ]);
@@ -70,7 +70,7 @@ class MountController extends Controller
 
         $this->alert->success('Mount was created successfully.')->flash();
 
-        return redirect()->route('admin.mounts.view', $mount->id);
+        return redirect()->route('admin.servers.mounts.view', $mount->id);
     }
 
     /**
@@ -88,7 +88,7 @@ class MountController extends Controller
 
         $this->alert->success('Mount was updated successfully.')->flash();
 
-        return redirect()->route('admin.mounts.view', $mount->id);
+        return redirect()->route('admin.servers.mounts.view', $mount->id);
     }
 
     /**
@@ -100,7 +100,7 @@ class MountController extends Controller
     {
         $mount->delete();
 
-        return redirect()->route('admin.mounts');
+        return redirect()->route('admin.servers.mounts');
     }
 
     /**
@@ -119,7 +119,7 @@ class MountController extends Controller
 
         $this->alert->success('Mount was updated successfully.')->flash();
 
-        return redirect()->route('admin.mounts.view', $mount->id);
+        return redirect()->route('admin.servers.mounts.view', $mount->id);
     }
 
     /**
@@ -136,7 +136,7 @@ class MountController extends Controller
 
         $this->alert->success('Mount was updated successfully.')->flash();
 
-        return redirect()->route('admin.mounts.view', $mount->id);
+        return redirect()->route('admin.servers.mounts.view', $mount->id);
     }
 
     /**
