@@ -5,6 +5,7 @@ import classNames from 'classnames';
 import styles from './style.module.css';
 import useFitText from 'use-fit-text';
 import CopyOnClick from '@/components/elements/CopyOnClick';
+import { usePersistedState } from '@/plugins/usePersistedState';
 
 interface StatBlockProps {
     title: string;
@@ -17,6 +18,7 @@ interface StatBlockProps {
 
 export default ({ title, copyOnClick, icon, color, className, children }: StatBlockProps) => {
     const { fontSize, ref } = useFitText({ minFontSize: 8, maxFontSize: 500 });
+    const [simpleConsole, _] = usePersistedState<boolean>('simpleConsole', false);
 
     return (
         <CopyOnClick text={copyOnClick}>
@@ -31,16 +33,30 @@ export default ({ title, copyOnClick, icon, color, className, children }: StatBl
                         })}
                     />
                 </div>
-                <div className={'flex flex-col justify-center overflow-hidden w-full'}>
-                    <p className={'font-header font-medium leading-tight text-xs md:text-sm text-gray-200'}>{title}</p>
-                    <div
-                        ref={ref}
-                        className={'h-[1.75rem] w-full font-semibold text-gray-50 truncate'}
-                        style={{ fontSize }}
-                    >
-                        {children}
+                {!simpleConsole ? (
+                    <div className={'flex flex-col justify-center overflow-hidden w-full'}>
+                        <p className={'font-header font-medium leading-tight text-xs md:text-sm text-gray-200'}>
+                            {title}
+                        </p>
+                        <div
+                            ref={ref}
+                            className={'h-[1.75rem] w-full font-semibold text-gray-50 truncate'}
+                            style={{ fontSize }}
+                        >
+                            {children}
+                        </div>
                     </div>
-                </div>
+                ) : (
+                    <div className={'flex flex-col justify-center overflow-hidden w-full'}>
+                        <div
+                            ref={ref}
+                            className={'h-[1.75rem] w-full font-semibold text-gray-50 truncate'}
+                            style={{ fontSize }}
+                        >
+                            {children}
+                        </div>
+                    </div>
+                )}
             </div>
         </CopyOnClick>
     );

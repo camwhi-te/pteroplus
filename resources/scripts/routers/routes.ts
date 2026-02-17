@@ -14,6 +14,7 @@ import AccountApiContainer from '@/components/dashboard/AccountApiContainer';
 import AccountSSHContainer from '@/components/dashboard/ssh/AccountSSHContainer';
 import ActivityLogContainer from '@/components/dashboard/activity/ActivityLogContainer';
 import ServerActivityLogContainer from '@/components/server/ServerActivityLogContainer';
+import AccountSettingsContainer from '@/components/dashboard/settings/AccountSettingsContainer';
 
 // Each of the router files is already code split out appropriately — so
 // all of the items above will only be loaded in when that router is loaded.
@@ -52,8 +53,13 @@ export default {
             exact: true,
         },
         {
+            path: '/settings',
+            name: 'Settings',
+            component: AccountSettingsContainer,
+        },
+        {
             path: '/api',
-            name: 'API Credentials',
+            name: 'API Keys',
             component: AccountApiContainer,
         },
         {
