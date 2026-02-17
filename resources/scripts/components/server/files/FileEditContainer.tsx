@@ -91,7 +91,7 @@ export default () => {
                 </div>
             </ErrorBoundary>
             {hash.replace(/^#/, '').endsWith('.pteroignore') && (
-                <div className={`mb-4 p-4 border-l-4 bg-neutral-900 rounded border-cyan-400`}>
+                <div className={`mb-4 p-4 border-l-4 bg-neutral-900 rounded border-blue-400`}>
                     <p className={`text-neutral-300 text-sm`}>
                         You&apos;re editing a{' '}
                         <code className={`font-mono bg-black rounded py-px px-1`}>.pteroignore</code> file. Any files or

@@ -29,7 +29,7 @@ const theme = {
     yellow: '#FAED70',
     blue: '#396FE2',
     magenta: '#BB80B3',
-    cyan: '#2DDAFD',
+    blue: '#2DDAFD',
     white: '#d0d0d0',
     brightBlack: 'rgba(255, 255, 255, 0.2)',
     brightRed: '#FF5370',
@@ -37,7 +37,7 @@ const theme = {
     brightYellow: '#FFCB6B',
     brightBlue: '#82AAFF',
     brightMagenta: '#C792EA',
-    brightCyan: '#89DDFF',
+    brightblue: '#89DDFF',
     brightWhite: '#ffffff',
     selection: '#FAF089',
 };

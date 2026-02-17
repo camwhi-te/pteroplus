@@ -25,7 +25,7 @@ const ServerResult = styled(Link)`
     ${tw`flex items-center bg-neutral-900 p-4 rounded border-l-4 border-neutral-900 no-underline transition-all duration-150`};
 
     &:hover {
-        ${tw`shadow border-cyan-500`};
+        ${tw`shadow border-blue-500`};
     }
 
     &:not(:last-of-type) {
@@ -119,7 +119,7 @@ export default ({ ...props }: Props) => {
                                         </p>
                                     </div>
                                     <div className={`flex-none text-right`}>
-                                        <span className={`text-xs py-1 px-2 bg-cyan-800 text-cyan-100 rounded`}>
+                                        <span className={`text-xs py-1 px-2 bg-blue-800 text-blue-100 rounded`}>
                                             {server.node}
                                         </span>
                                     </div>

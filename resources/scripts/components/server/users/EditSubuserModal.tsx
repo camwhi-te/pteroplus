@@ -117,7 +117,7 @@ const EditSubuserModal = ({ subuser }: Props) => {
                 </div>
                 <FlashMessageRender byKey={'user:edit'} className={`mt-4`} />
                 {!isRootAdmin && loggedInPermissions[0] !== '*' && (
-                    <div className={`mt-4 pl-4 py-2 border-l-4 border-cyan-400`}>
+                    <div className={`mt-4 pl-4 py-2 border-l-4 border-blue-400`}>
                         <p className={`text-sm text-neutral-300`}>
                             Only permissions which your account is currently assigned may be selected when creating or
                             modifying other users.

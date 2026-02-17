@@ -8,7 +8,7 @@
     }
 
     & > .icon {
-        @apply hidden flex-shrink-0 items-center justify-center rounded-lg shadow-md w-12 h-12;
+        @apply bg-neutral-900 hidden flex-shrink-0 items-center justify-center rounded-lg shadow-md w-12 h-12;
         @apply transition-colors duration-500;
         @apply sm:flex sm:mr-4;
 
@@ -51,7 +51,7 @@
     }
 
     & .command_input {
-        @apply relative bg-gray-900 px-2 text-gray-100 pl-10 pr-4 py-2 w-full font-mono text-sm sm:rounded-b;
+        @apply relative bg-black/25 px-2 text-gray-100 pl-10 pr-4 py-2 w-full font-mono text-sm sm:rounded-b;
         @apply focus:ring-0 outline-none focus-visible:outline-none;
         @apply border-0 border-b-2 border-transparent transition-colors duration-100;
         @apply active:border-cyan-500 focus:border-cyan-500;

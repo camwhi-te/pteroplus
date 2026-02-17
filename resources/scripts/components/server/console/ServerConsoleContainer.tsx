@@ -10,16 +10,29 @@ import StatGraphs from '@/components/server/console/StatGraphs';
 import PowerButtons from '@/components/server/console/PowerButtons';
 import ServerDetailsBlock from '@/components/server/console/ServerDetailsBlock';
 import { Alert } from '@/components/elements/alert';
+import { ip } from '@/lib/formatters';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCircle } from '@fortawesome/free-solid-svg-icons';
+import classNames from 'classnames';
+import { statusToColor } from '@/routers/ServerRouter';
 
 export type PowerAction = 'start' | 'stop' | 'restart' | 'kill';
 
 const ServerConsoleContainer = () => {
     const name = ServerContext.useStoreState((state) => state.server.data!.name);
+    const uuid = ServerContext.useStoreState((state) => state.server.data!.uuid);
     const description = ServerContext.useStoreState((state) => state.server.data!.description);
     const isInstalling = ServerContext.useStoreState((state) => state.server.isInstalling);
     const isTransferring = ServerContext.useStoreState((state) => state.server.data!.isTransferring);
     const eggFeatures = ServerContext.useStoreState((state) => state.server.data!.eggFeatures, isEqual);
     const isNodeUnderMaintenance = ServerContext.useStoreState((state) => state.server.data!.isNodeUnderMaintenance);
+    const status = ServerContext.useStoreState((state) => state.status.value);
+
+    const allocation = ServerContext.useStoreState((state) => {
+        const match = state.server.data!.allocations.find((allocation) => allocation.isDefault);
+
+        return !match ? 'n/a' : `${match.alias || ip(match.ip)}:${match.port}`;
+    });
 
     return (
         <ServerContentBlock title={'Console'}>
@@ -33,13 +46,25 @@ const ServerConsoleContainer = () => {
                 </Alert>
             )}
             <div className={'grid grid-cols-4 gap-4 mb-4'}>
-                <div className={'hidden sm:block sm:col-span-2 lg:col-span-3 pr-4'}>
-                    <h1 className={'font-header font-medium text-2xl text-gray-50 leading-relaxed line-clamp-1'}>
-                        {name}
-                    </h1>
-                    <p className={'text-sm line-clamp-2'}>{description}</p>
+                <div className={'hidden sm:block h-full sm:col-span-2 lg:col-span-3 bg-black/50 rounded-xl'}>
+                    <div className={'flex items-center h-full my-auto lg:px-4'}>
+                        <FontAwesomeIcon
+                            icon={faCircle}
+                            className={classNames(statusToColor(status), 'w-3 h-3 my-auto animate-pulse')}
+                        />
+                        <div className={'ml-3'}>
+                            <h1 className={'font-semibold text-2xl text-gray-50 line-clamp-1'}>{name}</h1>
+                            <p className={'text-2xs text-neutral-300 line-clamp-2'}>
+                                {description ?? <>Connected to {allocation}</>} &bull; {uuid}
+                            </p>
+                        </div>
+                    </div>
                 </div>
-                <div className={'col-span-4 sm:col-span-2 lg:col-span-1 self-end'}>
+                <div
+                    className={
+                        'bg-black/50 w-full h-full p-4 rounded-xl col-span-4 sm:col-span-2 lg:col-span-1 self-center'
+                    }
+                >
                     <Can action={['control.start', 'control.stop', 'control.restart']} matchAny>
                         <PowerButtons className={'flex sm:justify-end space-x-2'} />
                     </Can>

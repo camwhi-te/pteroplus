@@ -24,7 +24,7 @@ import PowerButtons from '@/components/server/console/PowerButtons';
 import classNames from 'classnames';
 import FloatingConsole from '@/components/server/console/FloatingConsole';
 
-function statusToColor(state?: ServerStatus): string {
+export function statusToColor(state?: ServerStatus): string {
     switch (state) {
         case 'offline':
             return 'text-red-500/50';
