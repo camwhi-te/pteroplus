@@ -6,7 +6,7 @@ const SubNavigation = styled.div`
 
     & > div {
         ${tw`flex items-center text-sm mx-auto px-2`};
-        max-width: 1200px;
+        max-width: 1600px;
 
         & > a,
         & > div {
