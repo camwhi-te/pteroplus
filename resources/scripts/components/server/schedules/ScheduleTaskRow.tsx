@@ -92,7 +92,7 @@ export default ({ schedule, task }: Props) => {
                             <p className={`text-xs uppercase text-neutral-400 mb-1`}>Ignoring files & folders:</p>
                         )}
                         <div
-                            className={`font-mono bg-neutral-800 rounded py-1 px-2 text-sm w-auto inline-block whitespace-pre-wrap break-all`}
+                            className={`font-mono bg-neutral-900 rounded py-1 px-2 text-sm w-auto inline-block whitespace-pre-wrap break-all`}
                         >
                             {task.payload}
                         </div>
@@ -112,7 +112,7 @@ export default ({ schedule, task }: Props) => {
                 )}
                 {task.sequenceId > 1 && task.timeOffset > 0 && (
                     <div className={`mr-6`}>
-                        <div className={`flex items-center px-2 py-1 bg-neutral-500 text-sm rounded-full`}>
+                        <div className={`flex items-center px-2 py-1 bg-neutral-600 text-sm rounded-full`}>
                             <Icon icon={faClock} className={`w-3 h-3 mr-2`} />
                             {task.timeOffset}s later
                         </div>

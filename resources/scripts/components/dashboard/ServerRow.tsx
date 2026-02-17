@@ -125,7 +125,7 @@ export default ({ server, className }: { server: Server; className?: string }) =
                         </div>
                     ) : server.isTransferring || server.status ? (
                         <div className={`flex-1 text-center`}>
-                            <span className={`bg-neutral-500 rounded px-2 py-1 text-neutral-100 text-xs`}>
+                            <span className={`bg-neutral-600 rounded px-2 py-1 text-neutral-100 text-xs`}>
                                 {server.isTransferring
                                     ? 'Transferring'
                                     : server.status === 'installing'

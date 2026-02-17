@@ -13,7 +13,7 @@ const Container = styled.label`
         ${tw`cursor-pointer`};
 
         &:hover {
-            ${tw`border-neutral-500 bg-neutral-800`};
+            ${tw`border-neutral-500 bg-neutral-900`};
         }
     }
 

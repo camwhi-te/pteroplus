@@ -23,7 +23,7 @@ interface Params {
 }
 
 const CronBox = ({ title, value }: { title: string; value: string }) => (
-    <div className={`bg-neutral-700 rounded p-3`}>
+    <div className={`bg-neutral-800 rounded p-3`}>
         <p className={`text-neutral-300 text-sm`}>{title}</p>
         <p className={`text-xl font-medium text-neutral-100`}>{value}</p>
     </div>
@@ -84,7 +84,7 @@ export default () => {
                 <Spinner size={'large'} centered />
             ) : (
                 <>
-                    <ScheduleCronRow cron={schedule.cron} className={`sm:hidden bg-neutral-700 rounded mb-4 p-3`} />
+                    <ScheduleCronRow cron={schedule.cron} className={`sm:hidden bg-neutral-800 rounded mb-4 p-3`} />
                     <div className={`rounded shadow`}>
                         <div
                             className={`sm:flex items-center bg-neutral-900 p-3 sm:p-6 border-b-4 border-neutral-600 rounded-t`}
@@ -94,7 +94,7 @@ export default () => {
                                     {schedule.name}
                                     {schedule.isProcessing ? (
                                         <span
-                                            className={`flex items-center rounded-full px-2 py-px text-xs ml-4 uppercase bg-neutral-600 text-white`}
+                                            className={`flex items-center rounded-full px-2 py-px text-xs ml-4 uppercase bg-neutral-700 text-white`}
                                         >
                                             <Spinner className={`w-3! h-3! mr-2`} />
                                             Processing
@@ -136,7 +136,7 @@ export default () => {
                             <CronBox title={'Month'} value={schedule.cron.month} />
                             <CronBox title={'Day (Week)'} value={schedule.cron.dayOfWeek} />
                         </div>
-                        <div className={`bg-neutral-700 rounded-b`}>
+                        <div className={`bg-neutral-800 rounded-b`}>
                             {schedule.tasks.length > 0
                                 ? schedule.tasks
                                       .sort((a, b) =>
