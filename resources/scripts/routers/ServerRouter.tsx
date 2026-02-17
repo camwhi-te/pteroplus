@@ -4,7 +4,7 @@ import { NavLink, Route, Switch, useRouteMatch } from 'react-router-dom';
 import NavigationBar from '@/components/NavigationBar';
 import TransitionRouter from '@/TransitionRouter';
 import WebsocketHandler from '@/components/server/WebsocketHandler';
-import { ServerContext } from '@/state/server';
+import { ServerContext, ServerStatus } from '@/state/server';
 import { CSSTransition } from 'react-transition-group';
 import Can from '@/components/elements/Can';
 import Spinner from '@/components/elements/Spinner';
@@ -15,11 +15,27 @@ import SubNavigation from '@/components/elements/SubNavigation';
 import InstallListener from '@/components/server/InstallListener';
 import ErrorBoundary from '@/components/elements/ErrorBoundary';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons';
+import { faCircle, faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons';
 import { useLocation } from 'react-router';
 import ConflictStateRenderer from '@/components/server/ConflictStateRenderer';
 import PermissionRoute from '@/components/elements/PermissionRoute';
 import routes from '@/routers/routes';
+import PowerButtons from '@/components/server/console/PowerButtons';
+import classNames from 'classnames';
+
+function statusToColor(state?: ServerStatus): string {
+    switch (state) {
+        case 'offline':
+            return 'text-red-500/50';
+        case 'starting':
+        case 'stopping':
+            return 'text-yellow-500/50 animate-pulse';
+        case 'running':
+            return 'text-green-500/50';
+        default:
+            return 'text-red-500';
+    }
+}
 
 export default () => {
     const match = useRouteMatch<{ id: string }>();
@@ -34,6 +50,7 @@ export default () => {
     const serverId = ServerContext.useStoreState((state) => state.server.data?.internalId);
     const getServer = ServerContext.useStoreActions((actions) => actions.server.getServer);
     const clearServerState = ServerContext.useStoreActions((actions) => actions.clearServerState);
+    const status = ServerContext.useStoreState((state) => state.status.value);
 
     const to = (value: string, url = false) => {
         if (value === '/') {
@@ -96,6 +113,23 @@ export default () => {
                                     <a href={`/admin/servers/view/${serverId}`} target={'_blank'}>
                                         <FontAwesomeIcon icon={faExternalLinkAlt} />
                                     </a>
+                                )}
+                                {location.pathname !== `/server/${uuid.slice(0, 8)}` && (
+                                    <CSSTransition timeout={150} classNames={'fade'} appear in>
+                                        <div className={'ml-auto bg-neutral-900 rounded-b-xl p-0'}>
+                                            <div className={'inline-flex space-x-2'}>
+                                                <div className={'bg-neutral-800 rounded-full px-2 py-1 text-xs'}>
+                                                    <FontAwesomeIcon
+                                                        icon={faCircle}
+                                                        size={'xs'}
+                                                        className={classNames(statusToColor(status), 'mr-1 my-auto')}
+                                                    />
+                                                    <span className={'capitalize'}>{status}</span>
+                                                </div>
+                                                <PowerButtons small />
+                                            </div>
+                                        </div>
+                                    </CSSTransition>
                                 )}
                             </div>
                         </SubNavigation>
