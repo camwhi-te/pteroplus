@@ -23,14 +23,63 @@
             @endif
         ">
             <div class="box-header with-border">
-                <h3 class="box-title">System Information</h3>
+                <h3 class="box-title">Version Information</h3>
             </div>
             <div class="box-body">
                 @if ($version->isLatestPanel())
-                    You are running Pterodactyl Panel version <code>{{ config('app.version') }}</code>. Your panel is up-to-date!
+                    You are running PteroPlus version <code>{{ config('app.version') }}</code>. Your panel is up-to-date!
                 @else
                     Your panel is <strong>not up-to-date!</strong> The latest version is <a href="https://github.com/Pterodactyl/Panel/releases/v{{ $version->getPanel() }}" target="_blank"><code>{{ $version->getPanel() }}</code></a> and you are currently running version <code>{{ config('app.version') }}</code>.
                 @endif
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <h3 class="box-title">Resource Count</h3>
+            </div>
+            <div class="box-body">
+                <div class="row">
+                    <div class="col-xs-6 col-sm-3">
+                        <div class="info-box bg-blue">
+                            <span class="info-box-icon"><i class="fa fa-database"></i></span>
+                            <div class="info-box-content" style="padding: 23px 10px 0;">
+                                <span class="info-box-text">Total Database Hosts</span>
+                                <span class="info-box-number">{{ $adminContent['count']['databases'] }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-3">
+                        <div class="info-box bg-blue">
+                            <span class="info-box-icon"><i class="fa fa-sitemap"></i></span>
+                            <div class="info-box-content" style="padding: 23px 10px 0;">
+                                <span class="info-box-text">Total Nodes</span>
+                                <span class="info-box-number">{{ $adminContent['count']['nodes'] }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-3">
+                        <div class="info-box bg-blue">
+                            <span class="info-box-icon"><i class="fa fa-server"></i></span>
+                            <div class="info-box-content" style="padding: 23px 10px 0;">
+                                <span class="info-box-text">Total Servers</span>
+                                <span class="info-box-number">{{ $adminContent['count']['servers'] }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-3">
+                        <div class="info-box bg-blue">
+                            <span class="info-box-icon"><i class="fa fa-users"></i></span>
+                            <div class="info-box-content" style="padding: 23px 10px 0;">
+                                <span class="info-box-text">Total Users</span>
+                                <span class="info-box-number">{{ $adminContent['count']['users'] }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
