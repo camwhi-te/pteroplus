@@ -1,7 +1,6 @@
 import React, { memo } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
-import tw from 'twin.macro';
 import isEqual from 'react-fast-compare';
 import classNames from 'classnames';
 

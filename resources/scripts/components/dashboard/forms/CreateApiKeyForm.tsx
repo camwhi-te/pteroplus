@@ -60,28 +60,23 @@ const PermissionRow = ({
     permissions: Permission;
     setPermissions: Dispatch<SetStateAction<Permission>>;
 }) => {
-    const onChange = (value: PermissionValues) =>
-        setPermissions(prev => ({ ...prev, [id]: value }));
+    const onChange = (value: PermissionValues) => setPermissions((prev) => ({ ...prev, [id]: value }));
 
     return (
         <div className={`mb-3 bg-neutral-900 rounded-lg p-3`}>
             <Label>{label}</Label>
-            <div className="space-x-6">
-                {(['0', '1', '2'] as PermissionValues[]).map(val => (
+            <div className='space-x-6'>
+                {(['0', '1', '2'] as PermissionValues[]).map((val) => (
                     <label key={val} className={`inline-flex items-center mr-2`}>
                         <Input
-                            type="radio"
+                            type='radio'
                             name={id}
                             value={val}
                             checked={permissions[id] === val}
                             onChange={() => onChange(val)}
                         />
                         <span className={`text-neutral-300 ml-2`}>
-                            {val === '0'
-                                ? 'No Access'
-                                : val === '1'
-                                ? 'Read Only'
-                                : 'Read & Write'}
+                            {val === '0' ? 'No Access' : val === '1' ? 'Read Only' : 'Read & Write'}
                         </span>
                     </label>
                 ))}
@@ -96,8 +91,8 @@ export default ({ onKeyCreated }: { onKeyCreated: (key: ApiKey) => void }) => {
     const [isAdmin, setIsAdmin] = useState(false);
     const [permissions, setPermissions] = useState<Permission>(defaultPermissions);
 
-    const rootAdmin = useStoreState(state => state.user.data!.rootAdmin);
-    const { addError, clearFlashes } = useStoreActions(actions => actions.flashes);
+    const rootAdmin = useStoreState((state) => state.user.data!.rootAdmin);
+    const { addError, clearFlashes } = useStoreActions((actions) => actions.flashes);
 
     const submit = (values: Values, { setSubmitting, resetForm }: FormikHelpers<Values>) => {
         clearFlashes('account');
@@ -108,7 +103,7 @@ export default ({ onKeyCreated }: { onKeyCreated: (key: ApiKey) => void }) => {
                 setApiKey(`${key.identifier}${secretToken}`);
                 onKeyCreated(key);
             })
-            .catch(error => {
+            .catch((error) => {
                 console.error(error);
                 addError({ key: 'account', message: httpErrorToHuman(error) });
                 setSubmitting(false);
@@ -119,8 +114,8 @@ export default ({ onKeyCreated }: { onKeyCreated: (key: ApiKey) => void }) => {
         <>
             <ApiKeyModal visible={!!apiKey} onModalDismissed={() => setApiKey('')} apiKey={apiKey} />
 
-            <Dialog open={open} onClose={() => setOpen(false)} title="Set Application API permissions">
-                {PERMISSIONS.map(p => (
+            <Dialog open={open} onClose={() => setOpen(false)} title='Set Application API permissions'>
+                {PERMISSIONS.map((p) => (
                     <PermissionRow
                         key={p.id}
                         id={p.id}
@@ -143,32 +138,37 @@ export default ({ onKeyCreated }: { onKeyCreated: (key: ApiKey) => void }) => {
                     <Form>
                         <SpinnerOverlay visible={isSubmitting} />
 
-                        <FormikFieldWrapper label="Description" name="description" description="A description of this API key." className={`mb-6`}>
-                            <Field name="description" as={Input} />
+                        <FormikFieldWrapper
+                            label='Description'
+                            name='description'
+                            description='A description of this API key.'
+                            className={`mb-6`}
+                        >
+                            <Field name='description' as={Input} />
                         </FormikFieldWrapper>
 
                         <FormikFieldWrapper
-                            label="Allowed IPs"
-                            name="allowedIps"
-                            description="Leave blank to allow any IP address, otherwise provide each IP address on a new line."
+                            label='Allowed IPs'
+                            name='allowedIps'
+                            description='Leave blank to allow any IP address, otherwise provide each IP address on a new line.'
                         >
-                            <Field name="allowedIps" as={CustomTextarea} />
+                            <Field name='allowedIps' as={CustomTextarea} />
                         </FormikFieldWrapper>
 
                         {rootAdmin && (
                             <div className={`mt-6 bg-neutral-900 p-4 rounded-lg border border-neutral-500`}>
                                 <Switch
-                                    name="isAdmin"
-                                    label="Administrator Key"
-                                    description="Do you want this key to be used for the Admin API?"
+                                    name='isAdmin'
+                                    label='Administrator Key'
+                                    description='Do you want this key to be used for the Admin API?'
                                     defaultChecked={isAdmin}
-                                    onChange={() => setIsAdmin(s => !s)}
+                                    onChange={() => setIsAdmin((s) => !s)}
                                 />
                             </div>
                         )}
 
                         {isAdmin && (
-                            <Alert type="warning" className={`mt-6`}>
+                            <Alert type='warning' className={`mt-6`}>
                                 You should set the permissions for this API key before creating.
                             </Alert>
                         )}
@@ -176,12 +176,12 @@ export default ({ onKeyCreated }: { onKeyCreated: (key: ApiKey) => void }) => {
                         <div className={`flex justify-end mt-6`}>
                             {isAdmin && (
                                 <Button.Text
-                                    type="button"
-                                    className="mr-2"
+                                    type='button'
+                                    className='mr-2'
                                     variant={Button.Variants.Secondary}
                                     onClick={() => setOpen(true)}
                                 >
-                                    <FontAwesomeIcon icon={faCog} className="mr-1" /> Set Permissions
+                                    <FontAwesomeIcon icon={faCog} className='mr-1' /> Set Permissions
                                 </Button.Text>
                             )}
                             <Button>Create</Button>

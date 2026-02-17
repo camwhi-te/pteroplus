@@ -9,7 +9,6 @@ import FlashMessageRender from '@/components/FlashMessageRender';
 import { boolean, number, object, string } from 'yup';
 import useFlash from '@/plugins/useFlash';
 import FormikFieldWrapper from '@/components/elements/FormikFieldWrapper';
-import tw from 'twin.macro';
 import Label from '@/components/elements/Label';
 import { Textarea } from '@/components/elements/Input';
 import { Button } from '@/components/elements/button/index';

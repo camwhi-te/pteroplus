@@ -13,8 +13,7 @@ import RotatePasswordButton from '@/components/server/databases/RotatePasswordBu
 import Can from '@/components/elements/Can';
 import { ServerDatabase } from '@/api/server/databases/getServerDatabases';
 import useFlash from '@/plugins/useFlash';
-import tw from 'twin.macro';
-import Button from '@/components/elements/Button';
+import { Button } from '@/components/elements/button';
 import Label from '@/components/elements/Label';
 import Input from '@/components/elements/Input';
 import GreyRowBox from '@/components/elements/GreyRowBox';
@@ -87,7 +86,12 @@ export default ({ database, className }: Props) => {
                                 description={'Enter the database name to confirm deletion.'}
                             />
                             <div className={`mt-6 text-right`}>
-                                <Button type={'button'} isSecondary className={`mr-2`} onClick={() => setVisible(false)}>
+                                <Button
+                                    type={'button'}
+                                    variant={Button.Variants.Secondary}
+                                    className={`mr-2`}
+                                    onClick={() => setVisible(false)}
+                                >
                                     Cancel
                                 </Button>
                                 <Button type={'submit'} color={'red'} disabled={!isValid}>
@@ -135,7 +139,7 @@ export default ({ database, className }: Props) => {
                     <Can action={'database.update'}>
                         <RotatePasswordButton databaseId={database.id} onUpdate={appendDatabase} />
                     </Can>
-                    <Button isSecondary onClick={() => setConnectionVisible(false)}>
+                    <Button variant={Button.Variants.Secondary} onClick={() => setConnectionVisible(false)}>
                         Close
                     </Button>
                 </div>
@@ -166,11 +170,15 @@ export default ({ database, className }: Props) => {
                     <p className={`mt-1 text-2xs text-neutral-500 uppercase select-none`}>Username</p>
                 </div>
                 <div className={`ml-8`}>
-                    <Button isSecondary className={`mr-2`} onClick={() => setConnectionVisible(true)}>
+                    <Button
+                        variant={Button.Variants.Secondary}
+                        className={`mr-2`}
+                        onClick={() => setConnectionVisible(true)}
+                    >
                         <FontAwesomeIcon icon={faEye} fixedWidth />
                     </Button>
                     <Can action={'database.delete'}>
-                        <Button color={'red'} isSecondary onClick={() => setVisible(true)}>
+                        <Button color={'red'} variant={Button.Variants.Secondary} onClick={() => setVisible(true)}>
                             <FontAwesomeIcon icon={faTrashAlt} fixedWidth />
                         </Button>
                     </Can>

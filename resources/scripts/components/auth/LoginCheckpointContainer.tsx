@@ -8,8 +8,7 @@ import { useFormikContext, withFormik } from 'formik';
 import useFlash from '@/plugins/useFlash';
 import { FlashStore } from '@/state/flashes';
 import Field from '@/components/elements/Field';
-import tw from 'twin.macro';
-import Button from '@/components/elements/Button';
+import { Button } from '@/components/elements/button';
 
 interface Values {
     code: string;
@@ -44,7 +43,7 @@ const LoginCheckpointContainer = () => {
                 />
             </div>
             <div className={`mt-6`}>
-                <Button size={'xlarge'} type={'submit'} disabled={isSubmitting} isLoading={isSubmitting}>
+                <Button size={Button.Sizes.Large} type={'submit'} disabled={isSubmitting}>
                     Continue
                 </Button>
             </div>

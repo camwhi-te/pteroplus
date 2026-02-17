@@ -14,7 +14,6 @@ import useFlash from '@/plugins/useFlash';
 import SpinnerOverlay from '@/components/elements/SpinnerOverlay';
 import deleteBackup from '@/api/server/backups/deleteBackup';
 import Can from '@/components/elements/Can';
-import tw from 'twin.macro';
 import getServerBackups from '@/api/swr/getServerBackups';
 import { ServerBackup } from '@/api/server/types';
 import { ServerContext } from '@/state/server';

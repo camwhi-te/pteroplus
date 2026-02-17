@@ -4,9 +4,8 @@ import { useFlashKey } from '@/plugins/useFlash';
 import ServerContentBlock from '@/components/elements/ServerContentBlock';
 import { ServerContext } from '@/state/server';
 import AllocationRow from '@/components/server/network/AllocationRow';
-import Button from '@/components/elements/Button';
+import { Button } from '@/components/elements/button';
 import createServerAllocation from '@/api/server/network/createServerAllocation';
-import tw from 'twin.macro';
 import Can from '@/components/elements/Can';
 import SpinnerOverlay from '@/components/elements/SpinnerOverlay';
 import getServerAllocations from '@/api/swr/getServerAllocations';
@@ -68,7 +67,11 @@ const NetworkContainer = () => {
                                     this server.
                                 </p>
                                 {allocationLimit > data.length && (
-                                    <Button className={`w-full sm:w-auto`} color={'primary'} onClick={onCreateAllocation}>
+                                    <Button
+                                        className={`w-full sm:w-auto`}
+                                        color={'primary'}
+                                        onClick={onCreateAllocation}
+                                    >
                                         Create Allocation
                                     </Button>
                                 )}

@@ -5,8 +5,7 @@ import { object, string } from 'yup';
 import Field from '@/components/elements/Field';
 import { ServerContext } from '@/state/server';
 import { join } from 'pathe';
-import tw from 'twin.macro';
-import Button from '@/components/elements/Button';
+import { Button } from '@/components/elements/button';
 
 type Props = RequiredModalProps & {
     onFileNamed: (name: string) => void;

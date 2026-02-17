@@ -1,7 +1,6 @@
 import React, { memo, useCallback } from 'react';
 import { useField } from 'formik';
 import TitledGreyBox from '@/components/elements/TitledGreyBox';
-import tw from 'twin.macro';
 import Input from '@/components/elements/Input';
 import isEqual from 'react-fast-compare';
 

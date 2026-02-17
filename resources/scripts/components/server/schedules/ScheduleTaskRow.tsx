@@ -17,7 +17,6 @@ import TaskDetailsModal from '@/components/server/schedules/TaskDetailsModal';
 import Can from '@/components/elements/Can';
 import useFlash from '@/plugins/useFlash';
 import { ServerContext } from '@/state/server';
-import tw from 'twin.macro';
 import ConfirmationModal from '@/components/elements/ConfirmationModal';
 import Icon from '@/components/elements/Icon';
 
@@ -103,7 +102,9 @@ export default ({ schedule, task }: Props) => {
             <div className={`mt-3 sm:mt-0 flex items-center w-full sm:w-auto`}>
                 {task.continueOnFailure && (
                     <div className={`mr-6`}>
-                        <div className={`flex items-center px-2 py-1 bg-yellow-500 text-yellow-800 text-sm rounded-full`}>
+                        <div
+                            className={`flex items-center px-2 py-1 bg-yellow-500 text-yellow-800 text-sm rounded-full`}
+                        >
                             <Icon icon={faArrowCircleDown} className={`w-3 h-3 mr-2`} />
                             Continues on Failure
                         </div>

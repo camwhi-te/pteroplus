@@ -7,7 +7,6 @@ import { FileObject } from '@/api/server/files/loadDirectory';
 import FileDropdownMenu from '@/components/server/files/FileDropdownMenu';
 import { ServerContext } from '@/state/server';
 import { NavLink, useRouteMatch } from 'react-router-dom';
-import tw from 'twin.macro';
 import isEqual from 'react-fast-compare';
 import SelectFileCheckbox from '@/components/server/files/SelectFileCheckbox';
 import { usePermissions } from '@/plugins/usePermissions';
@@ -67,10 +66,10 @@ const FileObjectRow = ({ file }: { file: FileObject }) => (
 );
 
 export default memo(FileObjectRow, (prevProps, nextProps) => {
-    /* eslint-disable @typescript-eslint/no-unused-vars */
+    /* eslint-disable unused-imports/no-unused-vars */
     const { isArchiveType, isEditable, ...prevFile } = prevProps.file;
     const { isArchiveType: nextIsArchiveType, isEditable: nextIsEditable, ...nextFile } = nextProps.file;
-    /* eslint-enable @typescript-eslint/no-unused-vars */
+    /* eslint-enable unused-imports/no-unused-vars */
 
     return isEqual(prevFile, nextFile);
 });

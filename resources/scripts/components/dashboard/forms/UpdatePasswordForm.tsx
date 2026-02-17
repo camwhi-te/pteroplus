@@ -7,7 +7,6 @@ import SpinnerOverlay from '@/components/elements/SpinnerOverlay';
 import updateAccountPassword from '@/api/account/updateAccountPassword';
 import { httpErrorToHuman } from '@/api/http';
 import { ApplicationStore } from '@/state';
-import tw from 'twin.macro';
 import { Button } from '@/components/elements/button/index';
 
 interface Values {

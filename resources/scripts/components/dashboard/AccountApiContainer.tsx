@@ -77,13 +77,21 @@ export default () => {
                                         {key.lastUsedAt ? format(key.lastUsedAt, 'MMM do, yyyy HH:mm') : 'Never'}
                                     </p>
                                     {key.identifier.startsWith('ptla_') && (
-                                        <p className={'text-2xs text-neutral-300 uppercase'}><FontAwesomeIcon icon={faStar} className={'mr-1'} />Administrator Key</p>
+                                        <p className={'text-2xs text-neutral-300 uppercase'}>
+                                            <FontAwesomeIcon icon={faStar} className={'mr-1'} />
+                                            Administrator Key
+                                        </p>
                                     )}
                                 </div>
                                 <p className={`text-sm ml-4 hidden md:block`}>
-                                    <code className={`font-mono py-1 px-2 bg-neutral-900 rounded`}>{key.identifier}</code>
+                                    <code className={`font-mono py-1 px-2 bg-neutral-900 rounded`}>
+                                        {key.identifier}
+                                    </code>
                                 </p>
-                                <button className={`ml-4 p-2 text-sm`} onClick={() => setDeleteIdentifier(key.identifier)}>
+                                <button
+                                    className={`ml-4 p-2 text-sm`}
+                                    onClick={() => setDeleteIdentifier(key.identifier)}
+                                >
                                     <FontAwesomeIcon
                                         icon={faTrashAlt}
                                         className={`text-neutral-400 hover:text-red-400 transition-colors duration-150`}

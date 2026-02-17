@@ -1,5 +1,4 @@
 import React from 'react';
-import tw from 'twin.macro';
 import Icon from '@/components/elements/Icon';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 

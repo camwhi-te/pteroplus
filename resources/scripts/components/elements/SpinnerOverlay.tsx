@@ -20,7 +20,8 @@ const SpinnerOverlay: React.FC<Props> = ({ size, fixed, visible, backgroundOpaci
             style={{ background: `rgba(0, 0, 0, ${backgroundOpacity || 0.45})` }}
         >
             <Spinner size={size} />
-            {children && (typeof children === 'string' ? <p className={`mt-4 text-neutral-400`}>{children}</p> : children)}
+            {children &&
+                (typeof children === 'string' ? <p className={`mt-4 text-neutral-400`}>{children}</p> : children)}
         </div>
     </Fade>
 );

@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
-import tw from 'twin.macro';
-import Button from '@/components/elements/Button';
+import { Button } from '@/components/elements/button';
 import asModal from '@/hoc/asModal';
 import ModalContext from '@/context/ModalContext';
 
@@ -19,7 +18,11 @@ const ConfirmationModal: React.FC<Props> = ({ title, children, buttonText, onCon
             <h2 className={`text-2xl mb-6`}>{title}</h2>
             <div className={`text-neutral-300`}>{children}</div>
             <div className={`flex flex-wrap items-center justify-end mt-8`}>
-                <Button isSecondary onClick={() => dismiss()} className={`w-full sm:w-auto border-transparent`}>
+                <Button
+                    variant={Button.Variants.Secondary}
+                    onClick={() => dismiss()}
+                    className={`w-full sm:w-auto border-transparent`}
+                >
                     Cancel
                 </Button>
                 <Button color={'red'} className={`w-full sm:w-auto mt-4 sm:mt-0 sm:ml-4`} onClick={() => onConfirmed()}>

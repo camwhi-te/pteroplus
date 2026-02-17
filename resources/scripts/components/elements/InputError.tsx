@@ -1,6 +1,5 @@
 import React from 'react';
 import { FormikErrors, FormikTouched } from 'formik';
-import tw from 'twin.macro';
 import { capitalize } from '@/lib/strings';
 
 interface Props {

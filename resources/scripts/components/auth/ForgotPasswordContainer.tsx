@@ -8,8 +8,7 @@ import { useStoreState } from 'easy-peasy';
 import Field from '@/components/elements/Field';
 import { Formik, FormikHelpers } from 'formik';
 import { object, string } from 'yup';
-import tw from 'twin.macro';
-import Button from '@/components/elements/Button';
+import { Button } from '@/components/elements/button';
 import Reaptcha from 'reaptcha';
 import useFlash from '@/plugins/useFlash';
 
@@ -83,7 +82,7 @@ export default () => {
                         type={'email'}
                     />
                     <div className={`mt-6`}>
-                        <Button type={'submit'} size={'xlarge'} disabled={isSubmitting} isLoading={isSubmitting}>
+                        <Button type={'submit'} size={Button.Sizes.Large} disabled={isSubmitting}>
                             Send Email
                         </Button>
                     </div>

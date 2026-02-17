@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { ServerContext } from '@/state/server';
 import Modal from '@/components/elements/Modal';
-import tw from 'twin.macro';
-import Button from '@/components/elements/Button';
+import { Button } from '@/components/elements/button';
 import FlashMessageRender from '@/components/FlashMessageRender';
 import useFlash from '@/plugins/useFlash';
 import { SocketEvent } from '@/components/server/events';
@@ -61,7 +60,11 @@ const HytaleOauthRequireFeature = () => {
                 continue.
             </p>
             <div className={`mt-8 sm:flex items-center justify-end`}>
-                <Button isSecondary onClick={() => setVisible(false)} className={`w-full sm:w-auto border-transparent`}>
+                <Button
+                    variant={Button.Variants.Secondary}
+                    onClick={() => setVisible(false)}
+                    className={`w-full sm:w-auto border-transparent`}
+                >
                     Cancel
                 </Button>
                 <Button onClick={handleLogin} className={`mt-4 sm:mt-0 sm:ml-4 w-full sm:w-auto`}>

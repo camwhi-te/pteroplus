@@ -10,8 +10,7 @@ import { Formik, FormikHelpers } from 'formik';
 import { object, ref, string } from 'yup';
 import Field from '@/components/elements/Field';
 import Input from '@/components/elements/Input';
-import tw from 'twin.macro';
-import Button from '@/components/elements/Button';
+import { Button } from '@/components/elements/button';
 
 interface Values {
     password: string;
@@ -79,7 +78,7 @@ export default ({ match, location }: RouteComponentProps<{ token: string }>) => 
                         <Field light label={'Confirm New Password'} name={'passwordConfirmation'} type={'password'} />
                     </div>
                     <div className={`mt-6`}>
-                        <Button size={'xlarge'} type={'submit'} disabled={isSubmitting} isLoading={isSubmitting}>
+                        <Button size={Button.Sizes.Large} type={'submit'} disabled={isSubmitting}>
                             Reset Password
                         </Button>
                     </div>

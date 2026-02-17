@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { ServerContext } from '@/state/server';
 import Modal from '@/components/elements/Modal';
-import tw from 'twin.macro';
-import Button from '@/components/elements/Button';
+import { Button } from '@/components/elements/button';
 import FlashMessageRender from '@/components/FlashMessageRender';
 import useFlash from '@/plugins/useFlash';
 import { SocketEvent } from '@/components/server/events';
@@ -58,8 +57,8 @@ const SteamDiskSpaceFeature = () => {
                     </p>
                     <p className={`mt-4`}>
                         Ensure the machine has enough disk space by typing{' '}
-                        <code className={`font-mono bg-neutral-900 rounded py-1 px-2`}>df -h</code> on the machine hosting
-                        this server. Delete files or increase the available disk space to resolve the issue.
+                        <code className={`font-mono bg-neutral-900 rounded py-1 px-2`}>df -h</code> on the machine
+                        hosting this server. Delete files or increase the available disk space to resolve the issue.
                     </p>
                     <div className={`mt-8 sm:flex items-center justify-end`}>
                         <Button onClick={() => setVisible(false)} className={`w-full sm:w-auto border-transparent`}>

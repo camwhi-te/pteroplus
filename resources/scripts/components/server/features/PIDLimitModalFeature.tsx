@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { ServerContext } from '@/state/server';
 import Modal from '@/components/elements/Modal';
-import tw from 'twin.macro';
-import Button from '@/components/elements/Button';
+import { Button } from '@/components/elements/button';
 import FlashMessageRender from '@/components/FlashMessageRender';
 import useFlash from '@/plugins/useFlash';
 import { SocketEvent } from '@/components/server/events';
@@ -65,8 +64,8 @@ const PIDLimitModalFeature = () => {
                     <p className={`mt-4`}>This server has reached the maximum process or memory limit.</p>
                     <p className={`mt-4`}>
                         Increasing <code className={`font-mono bg-neutral-900`}>container_pid_limit</code> in the wings
-                        configuration, <code className={`font-mono bg-neutral-900`}>config.yml</code>, might help resolve
-                        this issue.
+                        configuration, <code className={`font-mono bg-neutral-900`}>config.yml</code>, might help
+                        resolve this issue.
                     </p>
                     <p className={`mt-4`}>
                         <b>Note: Wings must be restarted for the configuration file changes to take effect</b>
