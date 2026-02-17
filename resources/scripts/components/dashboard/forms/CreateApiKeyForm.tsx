@@ -64,11 +64,11 @@ const PermissionRow = ({
         setPermissions(prev => ({ ...prev, [id]: value }));
 
     return (
-        <div css={tw`mb-3 bg-neutral-900 rounded-lg p-3`}>
+        <div className={`mb-3 bg-neutral-900 rounded-lg p-3`}>
             <Label>{label}</Label>
             <div className="space-x-6">
                 {(['0', '1', '2'] as PermissionValues[]).map(val => (
-                    <label key={val} css={tw`inline-flex items-center mr-2`}>
+                    <label key={val} className={`inline-flex items-center mr-2`}>
                         <Input
                             type="radio"
                             name={id}
@@ -76,7 +76,7 @@ const PermissionRow = ({
                             checked={permissions[id] === val}
                             onChange={() => onChange(val)}
                         />
-                        <span css={tw`text-neutral-300 ml-2`}>
+                        <span className={`text-neutral-300 ml-2`}>
                             {val === '0'
                                 ? 'No Access'
                                 : val === '1'
@@ -143,7 +143,7 @@ export default ({ onKeyCreated }: { onKeyCreated: (key: ApiKey) => void }) => {
                     <Form>
                         <SpinnerOverlay visible={isSubmitting} />
 
-                        <FormikFieldWrapper label="Description" name="description" description="A description of this API key." css={tw`mb-6`}>
+                        <FormikFieldWrapper label="Description" name="description" description="A description of this API key." className={`mb-6`}>
                             <Field name="description" as={Input} />
                         </FormikFieldWrapper>
 
@@ -156,7 +156,7 @@ export default ({ onKeyCreated }: { onKeyCreated: (key: ApiKey) => void }) => {
                         </FormikFieldWrapper>
 
                         {rootAdmin && (
-                            <div css={tw`mt-6 bg-neutral-900 p-4 rounded-lg border border-neutral-500`}>
+                            <div className={`mt-6 bg-neutral-900 p-4 rounded-lg border border-neutral-500`}>
                                 <Switch
                                     name="isAdmin"
                                     label="Administrator Key"
@@ -168,12 +168,12 @@ export default ({ onKeyCreated }: { onKeyCreated: (key: ApiKey) => void }) => {
                         )}
 
                         {isAdmin && (
-                            <Alert type="warning" css={tw`mt-6`}>
+                            <Alert type="warning" className={`mt-6`}>
                                 You should set the permissions for this API key before creating.
                             </Alert>
                         )}
 
-                        <div css={tw`flex justify-end mt-6`}>
+                        <div className={`flex justify-end mt-6`}>
                             {isAdmin && (
                                 <Button.Text
                                     type="button"

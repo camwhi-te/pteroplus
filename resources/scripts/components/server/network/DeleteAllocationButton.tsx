@@ -52,7 +52,7 @@ const DeleteAllocationButton = ({ allocation }: Props) => {
                 type={'button'}
                 onClick={() => setConfirm(true)}
             >
-                <Icon icon={faTrashAlt} css={tw`w-3 h-auto`} />
+                <Icon icon={faTrashAlt} className={`w-3 h-auto`} />
             </Button.Danger>
         </>
     );
