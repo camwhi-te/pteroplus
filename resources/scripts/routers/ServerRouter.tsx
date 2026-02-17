@@ -22,6 +22,7 @@ import PermissionRoute from '@/components/elements/PermissionRoute';
 import routes from '@/routers/routes';
 import PowerButtons from '@/components/server/console/PowerButtons';
 import classNames from 'classnames';
+import FloatingConsole from '@/components/server/console/FloatingConsole';
 
 function statusToColor(state?: ServerStatus): string {
     switch (state) {
@@ -111,13 +112,21 @@ export default () => {
                                 {rootAdmin && (
                                     // eslint-disable-next-line react/jsx-no-target-blank
                                     <a href={`/admin/servers/view/${serverId}`} target={'_blank'}>
-                                        <FontAwesomeIcon icon={faExternalLinkAlt} />
+                                        Admin
+                                        <FontAwesomeIcon
+                                            icon={faExternalLinkAlt}
+                                            className={'ml-0.5 mb-1'}
+                                            size={'xs'}
+                                        />
                                     </a>
                                 )}
                                 {location.pathname !== `/server/${uuid.slice(0, 8)}` && (
-                                    <CSSTransition timeout={150} classNames={'fade'} appear in>
-                                        <div className={'ml-auto bg-neutral-900 rounded-b-xl p-0'}>
-                                            <div className={'inline-flex space-x-2'}>
+                                    <span className={'ml-auto flex'}>
+                                        <div className={'my-auto mr-2 bg-neutral-900 rounded-lg p-1.5'}>
+                                            <FloatingConsole src={`/server/${uuid.slice(0, 8)}/console`} />
+                                        </div>
+                                        <div className={'bg-neutral-900 rounded-lg p-1.5'}>
+                                            <div className={'inline-flex space-x-2 my-auto'}>
                                                 <div className={'bg-neutral-800 rounded-full px-2 py-1 text-xs'}>
                                                     <FontAwesomeIcon
                                                         icon={faCircle}
@@ -129,7 +138,7 @@ export default () => {
                                                 <PowerButtons small />
                                             </div>
                                         </div>
-                                    </CSSTransition>
+                                    </span>
                                 )}
                             </div>
                         </SubNavigation>

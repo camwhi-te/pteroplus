@@ -1,4 +1,5 @@
 import React, { lazy } from 'react';
+import Console from '@/components/server/console/Console';
 import ServerConsole from '@/components/server/console/ServerConsoleContainer';
 import DatabasesContainer from '@/components/server/databases/DatabasesContainer';
 import ScheduleContainer from '@/components/server/schedules/ScheduleContainer';
@@ -73,6 +74,12 @@ export default {
             name: 'Console',
             component: ServerConsole,
             exact: true,
+        },
+        {
+            path: '/console',
+            permission: null,
+            name: undefined,
+            component: Console,
         },
         {
             path: '/files',
