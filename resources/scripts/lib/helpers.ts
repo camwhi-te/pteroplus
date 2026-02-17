@@ -14,4 +14,16 @@ function hexToRgba(hex: string, alpha = 1): string {
     return `rgba(${r}, ${g}, ${b}, ${alpha})`;
 }
 
-export { hexToRgba };
+/**
+ * URL-encodes the segments of a path.
+ * This allows to use the path as part of a URL while preserving the slashes.
+ * @param path the path to encode
+ */
+function encodePathSegments(path: string): string {
+    return path
+        .split('/')
+        .map((s) => encodeURIComponent(s))
+        .join('/');
+}
+
+export { hexToRgba, encodePathSegments };

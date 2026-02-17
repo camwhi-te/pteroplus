@@ -6,6 +6,7 @@ import { usePersistedState } from '@/plugins/usePersistedState';
 
 export default () => {
     const [simpleConsole, setSimpleConsole] = usePersistedState<boolean>('simpleConsole', false);
+    const [gridFileManager, setGridFileManager] = usePersistedState<boolean>('gridFileManager', false);
 
     return (
         <PageContentBlock title={'Account Settings'}>
@@ -18,6 +19,15 @@ export default () => {
                             description='Choosing this option will simplify the server console page by reducing content.'
                             defaultChecked={simpleConsole}
                             onChange={() => setSimpleConsole((s) => !s)}
+                        />
+                    </div>
+                    <div className={`mt-4 bg-neutral-900 p-4 rounded-lg border border-neutral-500`}>
+                        <Switch
+                            name='gridFileManager'
+                            label='Use grid for file manager'
+                            description='Choosing this option will display files and folders in a grid rather than a row.'
+                            defaultChecked={gridFileManager}
+                            onChange={() => setGridFileManager((s) => !s)}
                         />
                     </div>
                 </ContentBox>

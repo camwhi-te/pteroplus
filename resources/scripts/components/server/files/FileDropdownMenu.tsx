@@ -54,7 +54,7 @@ const Row = ({ icon, title, ...props }: RowProps) => (
     </StyledRow>
 );
 
-const FileDropdownMenu = ({ file }: { file: FileObject }) => {
+const FileDropdownMenu = ({ file, hidden }: { file: FileObject; hidden?: boolean }) => {
     const onClickRef = useRef<DropdownMenu>(null);
     const [showSpinner, setShowSpinner] = useState(false);
     const [modal, setModal] = useState<ModalType | null>(null);
@@ -143,7 +143,7 @@ const FileDropdownMenu = ({ file }: { file: FileObject }) => {
                 ref={onClickRef}
                 renderToggle={(onClick) => (
                     <div className={`px-4 py-2 hover:text-white`} onClick={onClick}>
-                        <FontAwesomeIcon icon={faEllipsisH} />
+                        {!hidden && <FontAwesomeIcon icon={faEllipsisH} />}
                         {modal ? (
                             modal === 'chmod' ? (
                                 <ChmodFileModal

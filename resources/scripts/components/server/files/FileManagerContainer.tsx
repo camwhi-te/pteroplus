@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { httpErrorToHuman } from '@/api/http';
 import { CSSTransition } from 'react-transition-group';
 import Spinner from '@/components/elements/Spinner';
-import FileObjectRow from '@/components/server/files/FileObjectRow';
 import FileManagerBreadcrumbs from '@/components/server/files/FileManagerBreadcrumbs';
 import { FileObject } from '@/api/server/files/loadDirectory';
 import NewDirectoryButton from '@/components/server/files/NewDirectoryButton';
@@ -21,6 +20,9 @@ import ErrorBoundary from '@/components/elements/ErrorBoundary';
 import { FileActionCheckbox } from '@/components/server/files/SelectFileCheckbox';
 import { hashToPath } from '@/helpers';
 import style from './style.module.css';
+import { usePersistedState } from '@/plugins/usePersistedState';
+import FileObjectGrid from './FileObjectGrid';
+import FileObjectRow from './FileObjectRow';
 
 const sortFiles = (files: FileObject[]): FileObject[] => {
     const sortedFiles: FileObject[] = files
@@ -30,6 +32,8 @@ const sortFiles = (files: FileObject[]): FileObject[] => {
 };
 
 export default () => {
+    const [gridFileManager, _] = usePersistedState<boolean>('gridFileManager', false);
+
     const id = ServerContext.useStoreState((state) => state.server.data!.id);
     const { hash } = useLocation();
     const { data: files, error, mutate } = useFileManagerSwr();
@@ -101,9 +105,19 @@ export default () => {
                                         </p>
                                     </div>
                                 )}
-                                {sortFiles(files.slice(0, 250)).map((file) => (
-                                    <FileObjectRow key={file.key} file={file} />
-                                ))}
+                                {gridFileManager ? (
+                                    <div className={'grid grid-cols-2 gap-2 lg:grid-cols-8 lg:gap-4'}>
+                                        {sortFiles(files.slice(0, 250)).map((file) => (
+                                            <FileObjectGrid key={file.key} file={file} />
+                                        ))}
+                                    </div>
+                                ) : (
+                                    <>
+                                        {sortFiles(files.slice(0, 250)).map((file) => (
+                                            <FileObjectRow key={file.key} file={file} />
+                                        ))}
+                                    </>
+                                )}
                                 <MassActionsBar />
                             </div>
                         </CSSTransition>
