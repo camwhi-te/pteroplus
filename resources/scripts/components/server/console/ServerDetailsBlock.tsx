@@ -34,7 +34,7 @@ const getBackgroundColor = (value: number, max: number | null): string | undefin
 };
 
 const Limit = ({ limit, children }: { limit: string | null; children: React.ReactNode }) => {
-    const [simpleConsole, _] = usePersistedState<boolean>('simpleConsole', false);
+    const [simpleConsole, _] = usePersistedState<boolean>('pteroplus:simpleConsole', false);
 
     return (
         <>
@@ -48,7 +48,7 @@ const Limit = ({ limit, children }: { limit: string | null; children: React.Reac
 
 const ServerDetailsBlock = ({ className }: { className?: string }) => {
     const [stats, setStats] = useState<Stats>({ memory: 0, cpu: 0, disk: 0, uptime: 0, tx: 0, rx: 0 });
-    const [simpleConsole, _] = usePersistedState<boolean>('simpleConsole', false);
+    const [simpleConsole, _] = usePersistedState<boolean>('pteroplus:simpleConsole', false);
 
     const status = ServerContext.useStoreState((state) => state.status.value);
     const connected = ServerContext.useStoreState((state) => state.socket.connected);

@@ -18,7 +18,7 @@ interface StatBlockProps {
 
 export default ({ title, copyOnClick, icon, color, className, children }: StatBlockProps) => {
     const { fontSize, ref } = useFitText({ minFontSize: 8, maxFontSize: 500 });
-    const [simpleConsole, _] = usePersistedState<boolean>('simpleConsole', false);
+    const [simpleConsole, _] = usePersistedState<boolean>('pteroplus:simpleConsole', false);
 
     return (
         <CopyOnClick text={copyOnClick}>

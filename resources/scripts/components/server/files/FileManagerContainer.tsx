@@ -32,7 +32,7 @@ const sortFiles = (files: FileObject[]): FileObject[] => {
 };
 
 export default () => {
-    const [gridFileManager, _] = usePersistedState<boolean>('gridFileManager', false);
+    const [gridFileManager, _] = usePersistedState<boolean>('pteroplus:gridFileManager', false);
 
     const id = ServerContext.useStoreState((state) => state.server.data!.id);
     const { hash } = useLocation();

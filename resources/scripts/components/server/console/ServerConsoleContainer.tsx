@@ -20,7 +20,7 @@ import { usePersistedState } from '@/plugins/usePersistedState';
 export type PowerAction = 'start' | 'stop' | 'restart' | 'kill';
 
 const ServerConsoleContainer = () => {
-    const [simpleConsole, _] = usePersistedState<boolean>('simpleConsole', false);
+    const [simpleConsole, _] = usePersistedState<boolean>('pteroplus:simpleConsole', false);
 
     const name = ServerContext.useStoreState((state) => state.server.data!.name);
     const uuid = ServerContext.useStoreState((state) => state.server.data!.uuid);
