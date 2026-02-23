@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { ServerContext } from '@/state/server';
-import Modal from '@/components/elements/Modal';
 import { Button } from '@/components/elements/button';
 import FlashMessageRender from '@/components/FlashMessageRender';
 import useFlash from '@/plugins/useFlash';
@@ -8,6 +7,8 @@ import { SocketEvent } from '@/components/server/events';
 import { useStoreState } from 'easy-peasy';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
+import { Dialog } from '@/components/elements/dialog';
+import SpinnerOverlay from '@/components/elements/SpinnerOverlay';
 
 const PIDLimitModalFeature = () => {
     const [visible, setVisible] = useState(false);
@@ -48,12 +49,8 @@ const PIDLimitModalFeature = () => {
     }, []);
 
     return (
-        <Modal
-            visible={visible}
-            onDismissed={() => setVisible(false)}
-            closeOnBackground={false}
-            showSpinnerOverlay={loading}
-        >
+        <Dialog open={visible} onClose={() => setVisible(false)}>
+            <SpinnerOverlay visible={loading} />
             <FlashMessageRender key={'feature:pidLimit'} className={`mb-4`} />
             {isAdmin ? (
                 <>
@@ -98,7 +95,7 @@ const PIDLimitModalFeature = () => {
                     </div>
                 </>
             )}
-        </Modal>
+        </Dialog>
     );
 };
 

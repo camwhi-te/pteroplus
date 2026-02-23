@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from 'react';
-import Modal, { RequiredModalProps } from '@/components/elements/Modal';
 import { Field, Form, Formik, FormikHelpers, useFormikContext } from 'formik';
 import { Actions, useStoreActions, useStoreState } from 'easy-peasy';
 import { object, string } from 'yup';
@@ -14,8 +13,7 @@ import styled from 'styled-components/macro';
 import tw from 'twin.macro';
 import Input from '@/components/elements/Input';
 import { ip } from '@/lib/formatters';
-
-type Props = RequiredModalProps;
+import { Dialog, DialogProps } from '@/components/elements/dialog';
 
 interface Values {
     term: string;
@@ -45,7 +43,7 @@ const SearchWatcher = () => {
     return null;
 };
 
-export default ({ ...props }: Props) => {
+export default ({ ...props }: DialogProps) => {
     const ref = useRef<HTMLInputElement>(null);
     const isAdmin = useStoreState((state) => state.user.data!.rootAdmin);
     const [servers, setServers] = useState<Server[]>([]);
@@ -68,10 +66,10 @@ export default ({ ...props }: Props) => {
     }, 500);
 
     useEffect(() => {
-        if (props.visible) {
+        if (props.open) {
             if (ref.current) ref.current.focus();
         }
-    }, [props.visible]);
+    }, [props.open]);
 
     // Formik does not support an innerRef on custom components.
     const InputWithRef = (props: any) => <Input autoFocus {...props} ref={ref} />;
@@ -85,7 +83,7 @@ export default ({ ...props }: Props) => {
             initialValues={{ term: '' } as Values}
         >
             {({ isSubmitting }) => (
-                <Modal {...props}>
+                <Dialog {...props}>
                     <Form>
                         <FormikFieldWrapper
                             name={'term'}
@@ -104,7 +102,7 @@ export default ({ ...props }: Props) => {
                                 <ServerResult
                                     key={server.uuid}
                                     to={`/server/${server.id}`}
-                                    onClick={() => props.onDismissed()}
+                                    onClick={() => props.onClose()}
                                 >
                                     <div className={`flex-1 mr-4`}>
                                         <p className={`text-sm`}>{server.name}</p>
@@ -127,7 +125,7 @@ export default ({ ...props }: Props) => {
                             ))}
                         </div>
                     )}
-                </Modal>
+                </Dialog>
             )}
         </Formik>
     );

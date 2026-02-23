@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { ServerContext } from '@/state/server';
-import Modal from '@/components/elements/Modal';
 import { Button } from '@/components/elements/button';
 import FlashMessageRender from '@/components/FlashMessageRender';
 import useFlash from '@/plugins/useFlash';
 import { SocketEvent } from '@/components/server/events';
 import { useStoreState } from 'easy-peasy';
+import { Dialog } from '@/components/elements/dialog';
+import SpinnerOverlay from '@/components/elements/SpinnerOverlay';
 
 const SteamDiskSpaceFeature = () => {
     const [visible, setVisible] = useState(false);
@@ -39,12 +40,8 @@ const SteamDiskSpaceFeature = () => {
     }, []);
 
     return (
-        <Modal
-            visible={visible}
-            onDismissed={() => setVisible(false)}
-            closeOnBackground={false}
-            showSpinnerOverlay={loading}
-        >
+        <Dialog open={visible} onClose={() => setVisible(false)}>
+            <SpinnerOverlay visible={loading} />
             <FlashMessageRender key={'feature:steamDiskSpace'} className={`mb-4`} />
             {isAdmin ? (
                 <>
@@ -82,7 +79,7 @@ const SteamDiskSpaceFeature = () => {
                     </div>
                 </>
             )}
-        </Modal>
+        </Dialog>
     );
 };
 

@@ -1,13 +1,14 @@
 import { fileBitsToString } from '@/helpers';
 import useFileManagerSwr from '@/plugins/useFileManagerSwr';
 import React from 'react';
-import Modal, { RequiredModalProps } from '@/components/elements/Modal';
 import { Form, Formik, FormikHelpers } from 'formik';
 import Field from '@/components/elements/Field';
 import chmodFiles from '@/api/server/files/chmodFiles';
 import { ServerContext } from '@/state/server';
 import { Button } from '@/components/elements/button';
 import useFlash from '@/plugins/useFlash';
+import SpinnerOverlay from '@/components/elements/SpinnerOverlay';
+import { Dialog, DialogProps } from '@/components/elements/dialog';
 
 interface FormikValues {
     mode: string;
@@ -18,7 +19,7 @@ interface File {
     mode: string;
 }
 
-type OwnProps = RequiredModalProps & { files: File[] };
+type OwnProps = DialogProps & { files: File[] };
 
 const ChmodFileModal = ({ files, ...props }: OwnProps) => {
     const uuid = ServerContext.useStoreState((state) => state.server.data!.uuid);
@@ -48,13 +49,14 @@ const ChmodFileModal = ({ files, ...props }: OwnProps) => {
                 setSubmitting(false);
                 clearAndAddHttpError({ key: 'files', error });
             })
-            .then(() => props.onDismissed());
+            .then(() => props.onClose());
     };
 
     return (
         <Formik onSubmit={submit} initialValues={{ mode: files.length > 1 ? '' : files[0].mode || '' }}>
             {({ isSubmitting }) => (
-                <Modal {...props} dismissable={!isSubmitting} showSpinnerOverlay={isSubmitting}>
+                <Dialog {...props} preventExternalClose={isSubmitting}>
+                    <SpinnerOverlay visible={isSubmitting} />
                     <Form className={`m-0`}>
                         <div className={`flex flex-wrap items-end`}>
                             <div className={`w-full sm:flex-1 sm:mr-4`}>
@@ -65,7 +67,7 @@ const ChmodFileModal = ({ files, ...props }: OwnProps) => {
                             </div>
                         </div>
                     </Form>
-                </Modal>
+                </Dialog>
             )}
         </Formik>
     );

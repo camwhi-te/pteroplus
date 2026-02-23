@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { ServerContext } from '@/state/server';
-import Modal from '@/components/elements/Modal';
 import { Button } from '@/components/elements/button';
 import setSelectedDockerImage from '@/api/server/setSelectedDockerImage';
 import FlashMessageRender from '@/components/FlashMessageRender';
@@ -11,6 +10,8 @@ import useWebsocketEvent from '@/plugins/useWebsocketEvent';
 import Can from '@/components/elements/Can';
 import getServerStartup from '@/api/swr/getServerStartup';
 import InputSpinner from '@/components/elements/InputSpinner';
+import SpinnerOverlay from '@/components/elements/SpinnerOverlay';
+import { Dialog } from '@/components/elements/dialog';
 
 const MATCH_ERRORS = [
     'minecraft 1.17 requires running the server with java 16 or above',
@@ -68,12 +69,8 @@ const JavaVersionModalFeature = () => {
     }, []);
 
     return (
-        <Modal
-            visible={visible}
-            onDismissed={() => setVisible(false)}
-            closeOnBackground={false}
-            showSpinnerOverlay={loading}
-        >
+        <Dialog open={visible} onClose={() => setVisible(false)}>
+            <SpinnerOverlay visible={loading} />
             <FlashMessageRender key={'feature:javaVersion'} className={`mb-4`} />
             <h2 className={`text-2xl mb-4 text-neutral-100`}>Unsupported Java Version</h2>
             <p className={`mt-4`}>
@@ -113,7 +110,7 @@ const JavaVersionModalFeature = () => {
                     </Button>
                 </Can>
             </div>
-        </Modal>
+        </Dialog>
     );
 };
 

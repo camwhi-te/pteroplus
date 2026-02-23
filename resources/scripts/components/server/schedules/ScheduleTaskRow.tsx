@@ -17,8 +17,8 @@ import TaskDetailsModal from '@/components/server/schedules/TaskDetailsDialog';
 import Can from '@/components/elements/Can';
 import useFlash from '@/plugins/useFlash';
 import { ServerContext } from '@/state/server';
-import ConfirmationModal from '@/components/elements/ConfirmationModal';
 import Icon from '@/components/elements/Icon';
+import { Dialog } from '@/components/elements/dialog';
 
 interface Props {
     schedule: Schedule;
@@ -69,15 +69,15 @@ export default ({ schedule, task }: Props) => {
         <div className={`sm:flex items-center p-3 sm:p-6 border-b border-neutral-800`}>
             <SpinnerOverlay visible={isLoading} fixed size={'large'} />
             <TaskDetailsModal schedule={schedule} task={task} open={isEditing} onClose={() => setIsEditing(false)} />
-            <ConfirmationModal
+            <Dialog.Confirm
                 title={'Confirm task deletion'}
-                buttonText={'Delete Task'}
+                confirm={'Delete Task'}
                 onConfirmed={onConfirmDeletion}
-                visible={visible}
-                onModalDismissed={() => setVisible(false)}
+                open={visible}
+                onClose={() => setVisible(false)}
             >
                 Are you sure you want to delete this task? This action cannot be undone.
-            </ConfirmationModal>
+            </Dialog.Confirm>
             <FontAwesomeIcon icon={icon} className={`text-lg text-white hidden md:block`} />
             <div className={`flex-none sm:flex-1 w-full sm:w-auto overflow-x-auto`}>
                 <p className={`md:ml-6 text-neutral-200 uppercase text-sm`}>{title}</p>

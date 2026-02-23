@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDatabase, faEye, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
-import Modal from '@/components/elements/Modal';
 import { Form, Formik, FormikHelpers } from 'formik';
 import Field from '@/components/elements/Field';
 import { object, string } from 'yup';
@@ -19,6 +18,8 @@ import Input from '@/components/elements/Input';
 import GreyRowBox from '@/components/elements/GreyRowBox';
 import CopyOnClick from '@/components/elements/CopyOnClick';
 import classNames from 'classnames';
+import { Dialog } from '@/components/elements/dialog';
+import SpinnerOverlay from '@/components/elements/SpinnerOverlay';
 
 interface Props {
     database: ServerDatabase;
@@ -62,15 +63,15 @@ export default ({ database, className }: Props) => {
         <>
             <Formik onSubmit={submit} initialValues={{ confirm: '' }} validationSchema={schema} isInitialValid={false}>
                 {({ isSubmitting, isValid, resetForm }) => (
-                    <Modal
-                        visible={visible}
-                        dismissable={!isSubmitting}
-                        showSpinnerOverlay={isSubmitting}
-                        onDismissed={() => {
+                    <Dialog
+                        open={visible}
+                        preventExternalClose={isSubmitting}
+                        onClose={() => {
                             setVisible(false);
                             resetForm();
                         }}
                     >
+                        <SpinnerOverlay visible={isSubmitting} />
                         <FlashMessageRender byKey={'database:delete'} className={`mb-6`} />
                         <h2 className={`text-2xl mb-6`}>Confirm database deletion</h2>
                         <p className={`text-sm`}>
@@ -99,10 +100,10 @@ export default ({ database, className }: Props) => {
                                 </Button>
                             </div>
                         </Form>
-                    </Modal>
+                    </Dialog>
                 )}
             </Formik>
-            <Modal visible={connectionVisible} onDismissed={() => setConnectionVisible(false)}>
+            <Dialog open={connectionVisible} onClose={() => setConnectionVisible(false)}>
                 <FlashMessageRender byKey={'database-connection-modal'} className={`mb-6`} />
                 <h3 className={`mb-6 text-2xl`}>Database connection details</h3>
                 <div>
@@ -143,7 +144,7 @@ export default ({ database, className }: Props) => {
                         Close
                     </Button>
                 </div>
-            </Modal>
+            </Dialog>
             <GreyRowBox $hoverable={false} className={classNames(className, 'mb-2')}>
                 <div className={`hidden md:block`}>
                     <FontAwesomeIcon icon={faDatabase} fixedWidth />

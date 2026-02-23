@@ -1,13 +1,13 @@
 import React from 'react';
-import Modal, { RequiredModalProps } from '@/components/elements/Modal';
 import { Form, Formik, FormikHelpers } from 'formik';
 import { object, string } from 'yup';
 import Field from '@/components/elements/Field';
 import { ServerContext } from '@/state/server';
 import { join } from 'pathe';
 import { Button } from '@/components/elements/button';
+import { Dialog, DialogProps } from '@/components/elements/dialog';
 
-type Props = RequiredModalProps & {
+type Props = DialogProps & {
     onFileNamed: (name: string) => void;
 };
 
@@ -15,7 +15,7 @@ interface Values {
     fileName: string;
 }
 
-export default ({ onFileNamed, onDismissed, ...props }: Props) => {
+export default ({ onFileNamed, onClose, ...props }: Props) => {
     const directory = ServerContext.useStoreState((state) => state.files.directory);
 
     const submit = (values: Values, { setSubmitting }: FormikHelpers<Values>) => {
@@ -32,10 +32,10 @@ export default ({ onFileNamed, onDismissed, ...props }: Props) => {
             })}
         >
             {({ resetForm }) => (
-                <Modal
-                    onDismissed={() => {
+                <Dialog
+                    onClose={() => {
                         resetForm();
-                        onDismissed();
+                        onClose();
                     }}
                     {...props}
                 >
@@ -51,7 +51,7 @@ export default ({ onFileNamed, onDismissed, ...props }: Props) => {
                             <Button>Create File</Button>
                         </div>
                     </Form>
-                </Modal>
+                </Dialog>
             )}
         </Formik>
     );

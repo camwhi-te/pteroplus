@@ -147,18 +147,16 @@ const FileDropdownMenu = ({ file, hidden }: { file: FileObject; hidden?: boolean
                         {modal ? (
                             modal === 'chmod' ? (
                                 <ChmodFileModal
-                                    visible
-                                    appear
+                                    open
                                     files={[{ file: file.name, mode: file.modeBits }]}
-                                    onDismissed={() => setModal(null)}
+                                    onClose={() => setModal(null)}
                                 />
                             ) : (
                                 <RenameFileModal
-                                    visible
-                                    appear
+                                    open
                                     files={[file.name]}
                                     useMoveTerminology={modal === 'move'}
-                                    onDismissed={() => setModal(null)}
+                                    onClose={() => setModal(null)}
                                 />
                             )
                         ) : null}

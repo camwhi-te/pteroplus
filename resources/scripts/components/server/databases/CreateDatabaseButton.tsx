@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Modal from '@/components/elements/Modal';
 import { Form, Formik, FormikHelpers } from 'formik';
 import Field from '@/components/elements/Field';
 import { object, string } from 'yup';
@@ -9,6 +8,8 @@ import { httpErrorToHuman } from '@/api/http';
 import FlashMessageRender from '@/components/FlashMessageRender';
 import useFlash from '@/plugins/useFlash';
 import { Button } from '@/components/elements/button';
+import { Dialog } from '@/components/elements/dialog';
+import SpinnerOverlay from '@/components/elements/SpinnerOverlay';
 
 interface Values {
     databaseName: string;
@@ -58,15 +59,15 @@ export default () => {
                 validationSchema={schema}
             >
                 {({ isSubmitting, resetForm }) => (
-                    <Modal
-                        visible={visible}
-                        dismissable={!isSubmitting}
-                        showSpinnerOverlay={isSubmitting}
-                        onDismissed={() => {
+                    <Dialog
+                        open={visible}
+                        preventExternalClose={isSubmitting}
+                        onClose={() => {
                             resetForm();
                             setVisible(false);
                         }}
                     >
+                        <SpinnerOverlay visible={isSubmitting} />
                         <FlashMessageRender byKey={'database:create'} className={`mb-6`} />
                         <h2 className={`text-2xl mb-6`}>Create new database</h2>
                         <Form className={`m-0`}>
@@ -102,7 +103,7 @@ export default () => {
                                 </Button>
                             </div>
                         </Form>
-                    </Modal>
+                    </Dialog>
                 )}
             </Formik>
             <Button onClick={() => setVisible(true)}>New Database</Button>

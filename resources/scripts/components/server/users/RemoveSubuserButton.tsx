@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import ConfirmationModal from '@/components/elements/ConfirmationModal';
 import { ServerContext } from '@/state/server';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
@@ -8,6 +7,7 @@ import deleteSubuser from '@/api/server/users/deleteSubuser';
 import { Actions, useStoreActions } from 'easy-peasy';
 import { ApplicationStore } from '@/state';
 import { httpErrorToHuman } from '@/api/http';
+import { Dialog } from '@/components/elements/dialog';
 
 export default ({ subuser }: { subuser: Subuser }) => {
     const [loading, setLoading] = useState(false);
@@ -34,17 +34,17 @@ export default ({ subuser }: { subuser: Subuser }) => {
 
     return (
         <>
-            <ConfirmationModal
+            <Dialog.Confirm
                 title={'Delete this subuser?'}
-                buttonText={'Yes, remove subuser'}
-                visible={showConfirmation}
-                showSpinnerOverlay={loading}
+                confirm={'Yes, remove subuser'}
+                open={showConfirmation}
+                preventExternalClose={loading}
                 onConfirmed={() => doDeletion()}
-                onModalDismissed={() => setShowConfirmation(false)}
+                onClose={() => setShowConfirmation(false)}
             >
                 Are you sure you wish to remove this subuser? They will have all access to this server revoked
                 immediately.
-            </ConfirmationModal>
+            </Dialog.Confirm>
             <button
                 type={'button'}
                 aria-label={'Delete subuser'}

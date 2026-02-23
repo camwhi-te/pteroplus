@@ -2,7 +2,6 @@ import axios, { AxiosProgressEvent } from 'axios';
 import getFileUploadUrl from '@/api/server/files/getFileUploadUrl';
 import { Button } from '@/components/elements/button/index';
 import React, { useEffect, useRef } from 'react';
-import { ModalMask } from '@/components/elements/Modal';
 import Fade from '@/components/elements/Fade';
 import useEventListener from '@/plugins/useEventListener';
 import { useFlashKey } from '@/plugins/useFlash';
@@ -103,7 +102,8 @@ export default ({ className }: WithClassname) => {
         <>
             <Portal>
                 <Fade appear in={visible.value} timeout={75} key={'upload_modal_mask'} unmountOnExit>
-                    <ModalMask
+                    <div
+                        className={'fixed z-50 overflow-auto flex w-full inset-0 bg-black/25'}
                         onClick={() => (visible.value = false)}
                         onDragOver={(e) => e.preventDefault()}
                         onDrop={(e) => {
@@ -128,7 +128,7 @@ export default ({ className }: WithClassname) => {
                                 </p>
                             </div>
                         </div>
-                    </ModalMask>
+                    </div>
                 </Fade>
             </Portal>
             <input

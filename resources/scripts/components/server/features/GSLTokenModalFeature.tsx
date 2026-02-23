@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { ServerContext } from '@/state/server';
-import Modal from '@/components/elements/Modal';
 import { Button } from '@/components/elements/button';
 import FlashMessageRender from '@/components/FlashMessageRender';
 import useFlash from '@/plugins/useFlash';
@@ -8,6 +7,8 @@ import { SocketEvent, SocketRequest } from '@/components/server/events';
 import Field from '@/components/elements/Field';
 import updateStartupVariable from '@/api/server/updateStartupVariable';
 import { Form, Formik } from 'formik';
+import { Dialog } from '@/components/elements/dialog';
+import SpinnerOverlay from '@/components/elements/SpinnerOverlay';
 
 interface Values {
     gslToken: string;
@@ -66,12 +67,8 @@ const GSLTokenModalFeature = () => {
 
     return (
         <Formik onSubmit={updateGSLToken} initialValues={{ gslToken: '' }}>
-            <Modal
-                visible={visible}
-                onDismissed={() => setVisible(false)}
-                closeOnBackground={false}
-                showSpinnerOverlay={loading}
-            >
+            <Dialog open={visible} onClose={() => setVisible(false)}>
+                <SpinnerOverlay visible={loading} />
                 <FlashMessageRender key={'feature:gslToken'} className={`mb-4`} />
                 <Form>
                     <h2 className={`text-2xl mb-4 text-neutral-100`}>Invalid GSL token!</h2>
@@ -96,7 +93,7 @@ const GSLTokenModalFeature = () => {
                         </Button>
                     </div>
                 </Form>
-            </Modal>
+            </Dialog>
         </Formik>
     );
 };

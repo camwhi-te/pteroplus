@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { ServerContext } from '@/state/server';
-import Modal from '@/components/elements/Modal';
 import { Button } from '@/components/elements/button';
 import FlashMessageRender from '@/components/FlashMessageRender';
 import useFlash from '@/plugins/useFlash';
 import { SocketEvent } from '@/components/server/events';
+import { Dialog } from '@/components/elements/dialog';
 
 const HytaleOauthRequireFeature = () => {
     const [visible, setVisible] = useState(false);
@@ -44,14 +44,12 @@ const HytaleOauthRequireFeature = () => {
     };
 
     return (
-        <Modal
-            visible={visible}
-            onDismissed={() => {
+        <Dialog
+            open={visible}
+            onClose={() => {
                 setVisible(false);
                 setLink('');
             }}
-            closeOnBackground={false}
-            showSpinnerOverlay={false}
         >
             <FlashMessageRender key={'feature:hytaleOauth'} className={`mb-4`} />
             <h2 className={`text-2xl mb-4 text-neutral-100`}>Authentication Required</h2>
@@ -71,7 +69,7 @@ const HytaleOauthRequireFeature = () => {
                     Log in
                 </Button>
             </div>
-        </Modal>
+        </Dialog>
     );
 };
 

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import Modal, { RequiredModalProps } from '@/components/elements/Modal';
 import { Field as FormikField, Form, Formik, FormikHelpers, useFormikContext } from 'formik';
 import { boolean, object, string } from 'yup';
 import Field from '@/components/elements/Field';
@@ -13,6 +12,8 @@ import getServerBackups from '@/api/swr/getServerBackups';
 import { ServerContext } from '@/state/server';
 import FormikSwitch from '@/components/elements/FormikSwitch';
 import Can from '@/components/elements/Can';
+import { Dialog, DialogProps } from '@/components/elements/dialog';
+import SpinnerOverlay from '@/components/elements/SpinnerOverlay';
 
 interface Values {
     name: string;
@@ -20,11 +21,12 @@ interface Values {
     isLocked: boolean;
 }
 
-const ModalContent = ({ ...props }: RequiredModalProps) => {
+const ModalContent = ({ ...props }: DialogProps) => {
     const { isSubmitting } = useFormikContext<Values>();
 
     return (
-        <Modal {...props} showSpinnerOverlay={isSubmitting}>
+        <Dialog {...props}>
+            <SpinnerOverlay visible={isSubmitting} />
             <Form>
                 <FlashMessageRender byKey={'backups:create'} className={`mb-4`} />
                 <h2 className={`text-2xl mb-6`}>Create server backup</h2>
@@ -62,7 +64,7 @@ const ModalContent = ({ ...props }: RequiredModalProps) => {
                     </Button>
                 </div>
             </Form>
-        </Modal>
+        </Dialog>
     );
 };
 
@@ -104,7 +106,7 @@ export default () => {
                         isLocked: boolean(),
                     })}
                 >
-                    <ModalContent appear visible={visible} onDismissed={() => setVisible(false)} />
+                    <ModalContent open={visible} onClose={() => setVisible(false)} />
                 </Formik>
             )}
             <Button className={`w-full sm:w-auto`} onClick={() => setVisible(true)}>

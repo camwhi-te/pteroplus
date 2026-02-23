@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { ServerContext } from '@/state/server';
-import Modal from '@/components/elements/Modal';
 import { Button } from '@/components/elements/button';
 import saveFileContents from '@/api/server/files/saveFileContents';
 import FlashMessageRender from '@/components/FlashMessageRender';
 import useFlash from '@/plugins/useFlash';
 import { SocketEvent, SocketRequest } from '@/components/server/events';
+import { Dialog } from '@/components/elements/dialog';
+import SpinnerOverlay from '@/components/elements/SpinnerOverlay';
 
 const EulaModalFeature = () => {
     const [visible, setVisible] = useState(false);
@@ -57,12 +58,8 @@ const EulaModalFeature = () => {
     }, []);
 
     return (
-        <Modal
-            visible={visible}
-            onDismissed={() => setVisible(false)}
-            closeOnBackground={false}
-            showSpinnerOverlay={loading}
-        >
+        <Dialog open={visible} onClose={() => setVisible(false)}>
+            <SpinnerOverlay visible={loading} />
             <FlashMessageRender key={'feature:eula'} className={`mb-4`} />
             <h2 className={`text-2xl mb-4 text-neutral-100`}>Accept Minecraft&reg; EULA</h2>
             <p className={`text-neutral-200`}>
@@ -89,7 +86,7 @@ const EulaModalFeature = () => {
                     I Accept
                 </Button>
             </div>
-        </Modal>
+        </Dialog>
     );
 };
 
