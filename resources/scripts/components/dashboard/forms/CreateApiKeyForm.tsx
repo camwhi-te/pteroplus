@@ -14,7 +14,7 @@ import Label from '@/components/elements/Label';
 import { Dialog } from '@/components/elements/dialog';
 import { Alert } from '@/components/elements/alert';
 import SpinnerOverlay from '@/components/elements/SpinnerOverlay';
-import ApiKeyModal from '@/components/dashboard/ApiKeyModal';
+import ApiKeyModal from '@/components/dashboard/ApiKeyDialog';
 
 import createApiKey from '@/api/account/createApiKey';
 import { httpErrorToHuman } from '@/api/http';
@@ -112,7 +112,7 @@ export default ({ onKeyCreated }: { onKeyCreated: (key: ApiKey) => void }) => {
 
     return (
         <>
-            <ApiKeyModal visible={!!apiKey} onModalDismissed={() => setApiKey('')} apiKey={apiKey} />
+            <ApiKeyModal open={!!apiKey} onClose={() => setApiKey('')} apiKey={apiKey} />
 
             <Dialog open={open} onClose={() => setOpen(false)} title='Set Application API permissions'>
                 {PERMISSIONS.map((p) => (

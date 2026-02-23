@@ -3,7 +3,7 @@ import { useHistory, useParams } from 'react-router-dom';
 import getServerSchedule from '@/api/server/schedules/getServerSchedule';
 import Spinner from '@/components/elements/Spinner';
 import FlashMessageRender from '@/components/FlashMessageRender';
-import EditScheduleModal from '@/components/server/schedules/EditScheduleModal';
+import EditScheduleModal from '@/components/server/schedules/EditScheduleDialog';
 import NewTaskButton from '@/components/server/schedules/NewTaskButton';
 import DeleteScheduleButton from '@/components/server/schedules/DeleteScheduleButton';
 import Can from '@/components/elements/Can';
@@ -96,6 +96,7 @@ export default () => {
                                         <span
                                             className={`flex items-center rounded-full px-2 py-px text-xs ml-4 uppercase bg-neutral-700 text-white`}
                                         >
+                                            {/* @ts-expect-error this is fine! */}
                                             <Spinner className={`w-3! h-3! mr-2`} />
                                             Processing
                                         </span>
@@ -152,7 +153,7 @@ export default () => {
                                 : null}
                         </div>
                     </div>
-                    <EditScheduleModal visible={showEditModal} schedule={schedule} onModalDismissed={toggleEditModal} />
+                    <EditScheduleModal open={showEditModal} schedule={schedule} onClose={toggleEditModal} />
                     <div className={`mt-6 flex sm:justify-end`}>
                         <Can action={'schedule.delete'}>
                             <DeleteScheduleButton

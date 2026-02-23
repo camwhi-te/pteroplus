@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import EditSubuserModal from '@/components/server/users/EditSubuserModal';
+import EditSubuserModal from '@/components/server/users/EditSubuserDialog';
 import { Button } from '@/components/elements/button/index';
 
 export default () => {
@@ -7,7 +7,7 @@ export default () => {
 
     return (
         <>
-            <EditSubuserModal visible={visible} onModalDismissed={() => setVisible(false)} />
+            <EditSubuserModal open={visible} onClose={() => setVisible(false)} />
             <Button onClick={() => setVisible(true)}>New User</Button>
         </>
     );

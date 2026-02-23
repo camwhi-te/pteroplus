@@ -13,9 +13,9 @@ import Label from '@/components/elements/Label';
 import { Textarea } from '@/components/elements/Input';
 import { Button } from '@/components/elements/button/index';
 import Select from '@/components/elements/Select';
-import ModalContext from '@/context/ModalContext';
-import asModal from '@/hoc/asModal';
+import asDialog from '@/hoc/asDialog';
 import FormikSwitch from '@/components/elements/FormikSwitch';
+import { DialogWrapperContext } from '@/components/elements/dialog';
 
 interface Props {
     schedule: Schedule;
@@ -63,8 +63,8 @@ const ActionListener = () => {
     return null;
 };
 
-const TaskDetailsModal = ({ schedule, task }: Props) => {
-    const { dismiss } = useContext(ModalContext);
+const TaskDetailsDialog = ({ schedule, task }: Props) => {
+    const { close } = useContext(DialogWrapperContext);
     const { clearFlashes, addError } = useFlash();
 
     const uuid = ServerContext.useStoreState((state) => state.server.data!.uuid);
@@ -94,7 +94,7 @@ const TaskDetailsModal = ({ schedule, task }: Props) => {
                     }
 
                     appendSchedule({ ...schedule, tasks });
-                    dismiss();
+                    close();
                 })
                 .catch((error) => {
                     console.error(error);
@@ -193,4 +193,4 @@ const TaskDetailsModal = ({ schedule, task }: Props) => {
     );
 };
 
-export default asModal<Props>()(TaskDetailsModal);
+export default asDialog()(TaskDetailsDialog);

@@ -10,9 +10,9 @@ import FlashMessageRender from '@/components/FlashMessageRender';
 import useFlash from '@/plugins/useFlash';
 import { Button } from '@/components/elements/button/index';
 import ModalContext from '@/context/ModalContext';
-import asModal from '@/hoc/asModal';
 import Switch from '@/components/elements/Switch';
 import ScheduleCheatsheetCards from '@/components/server/schedules/ScheduleCheatsheetCards';
+import asDialog from '@/hoc/asDialog';
 
 interface Props {
     schedule?: Schedule;
@@ -29,7 +29,7 @@ interface Values {
     onlyWhenOnline: boolean;
 }
 
-const EditScheduleModal = ({ schedule }: Props) => {
+const EditScheduleDialog = ({ schedule }: Props) => {
     const { addError, clearFlashes } = useFlash();
     const { dismiss } = useContext(ModalContext);
 
@@ -146,4 +146,4 @@ const EditScheduleModal = ({ schedule }: Props) => {
     );
 };
 
-export default asModal<Props>()(EditScheduleModal);
+export default asDialog()(EditScheduleDialog);

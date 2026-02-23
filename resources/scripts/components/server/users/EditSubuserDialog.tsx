@@ -14,9 +14,9 @@ import { useDeepCompareMemo } from '@/plugins/useDeepCompareMemo';
 import tw from 'twin.macro';
 import { Button } from '@/components/elements/button';
 import PermissionTitleBox from '@/components/server/users/PermissionTitleBox';
-import asModal from '@/hoc/asModal';
 import PermissionRow from '@/components/server/users/PermissionRow';
 import ModalContext from '@/context/ModalContext';
+import asDialog from '@/hoc/asDialog';
 
 type Props = {
     subuser?: Subuser;
@@ -27,7 +27,7 @@ interface Values {
     permissions: string[];
 }
 
-const EditSubuserModal = ({ subuser }: Props) => {
+const EditSubuserDialog = ({ subuser }: Props) => {
     const ref = useRef<HTMLHeadingElement>(null);
     const uuid = ServerContext.useStoreState((state) => state.server.data!.uuid);
     const appendSubuser = ServerContext.useStoreActions((actions) => actions.subusers.appendSubuser);
@@ -169,6 +169,4 @@ const EditSubuserModal = ({ subuser }: Props) => {
     );
 };
 
-export default asModal<Props>({
-    top: false,
-})(EditSubuserModal);
+export default asDialog()(EditSubuserDialog);

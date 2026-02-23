@@ -13,7 +13,7 @@ import {
 import deleteScheduleTask from '@/api/server/schedules/deleteScheduleTask';
 import { httpErrorToHuman } from '@/api/http';
 import SpinnerOverlay from '@/components/elements/SpinnerOverlay';
-import TaskDetailsModal from '@/components/server/schedules/TaskDetailsModal';
+import TaskDetailsModal from '@/components/server/schedules/TaskDetailsDialog';
 import Can from '@/components/elements/Can';
 import useFlash from '@/plugins/useFlash';
 import { ServerContext } from '@/state/server';
@@ -68,12 +68,7 @@ export default ({ schedule, task }: Props) => {
     return (
         <div className={`sm:flex items-center p-3 sm:p-6 border-b border-neutral-800`}>
             <SpinnerOverlay visible={isLoading} fixed size={'large'} />
-            <TaskDetailsModal
-                schedule={schedule}
-                task={task}
-                visible={isEditing}
-                onModalDismissed={() => setIsEditing(false)}
-            />
+            <TaskDetailsModal schedule={schedule} task={task} open={isEditing} onClose={() => setIsEditing(false)} />
             <ConfirmationModal
                 title={'Confirm task deletion'}
                 buttonText={'Delete Task'}

@@ -3,7 +3,7 @@ import { Subuser } from '@/state/server/subusers';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPencilAlt, faUnlockAlt, faUserLock } from '@fortawesome/free-solid-svg-icons';
 import RemoveSubuserButton from '@/components/server/users/RemoveSubuserButton';
-import EditSubuserModal from '@/components/server/users/EditSubuserModal';
+import EditSubuserModal from '@/components/server/users/EditSubuserDialog';
 import Can from '@/components/elements/Can';
 import { useStoreState } from 'easy-peasy';
 import tw from 'twin.macro';
@@ -19,7 +19,7 @@ export default ({ subuser }: Props) => {
 
     return (
         <GreyRowBox className={`mb-2`}>
-            <EditSubuserModal subuser={subuser} visible={visible} onModalDismissed={() => setVisible(false)} />
+            <EditSubuserModal subuser={subuser} open={visible} onClose={() => setVisible(false)} />
             <div
                 className={`w-10 h-10 rounded-full bg-white border-2 border-neutral-800 overflow-hidden hidden md:block`}
             >

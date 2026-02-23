@@ -6,7 +6,7 @@ import { useHistory, useRouteMatch } from 'react-router-dom';
 import FlashMessageRender from '@/components/FlashMessageRender';
 import ScheduleRow from '@/components/server/schedules/ScheduleRow';
 import { httpErrorToHuman } from '@/api/http';
-import EditScheduleModal from '@/components/server/schedules/EditScheduleModal';
+import EditScheduleModal from '@/components/server/schedules/EditScheduleDialog';
 import Can from '@/components/elements/Can';
 import useFlash from '@/plugins/useFlash';
 import GreyRowBox from '@/components/elements/GreyRowBox';
@@ -65,7 +65,7 @@ export default () => {
                     )}
                     <Can action={'schedule.create'}>
                         <div className={`mt-8 flex justify-end`}>
-                            <EditScheduleModal visible={visible} onModalDismissed={() => setVisible(false)} />
+                            <EditScheduleModal open={visible} onClose={() => setVisible(false)} />
                             <Button type={'button'} onClick={() => setVisible(true)}>
                                 Create schedule
                             </Button>
