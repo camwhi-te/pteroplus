@@ -1,0 +1,10 @@
+{
+  "name": "Minimal Ubuntu",
+  "image": "ubuntu:24.04",
+  "features": {},
+  "customizations": {
+    "vscode": {
+      "extensions": []
+    }
+  }
+}
