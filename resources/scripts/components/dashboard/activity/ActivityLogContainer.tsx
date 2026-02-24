@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { ActivityLogFilters, useActivityLogs } from '@/api/account/activity';
 import { useFlashKey } from '@/plugins/useFlash';
-import PageContentBlock from '@/components/elements/PageContentBlock';
-import FlashMessageRender from '@/components/FlashMessageRender';
 import { Link } from 'react-router-dom';
 import PaginationFooter from '@/components/elements/table/PaginationFooter';
 import { DesktopComputerIcon, XCircleIcon } from '@heroicons/react/solid';
@@ -15,7 +13,7 @@ import useLocationHash from '@/plugins/useLocationHash';
 
 export default () => {
     const { hash } = useLocationHash();
-    const { clearAndAddHttpError } = useFlashKey('account');
+    const { clearAndAddHttpError } = useFlashKey('account:activity');
     const [filters, setFilters] = useState<ActivityLogFilters>({ page: 1, sorts: { timestamp: -1 } });
     const { data, isValidating, error } = useActivityLogs(filters, {
         revalidateOnMount: true,
@@ -31,8 +29,7 @@ export default () => {
     }, [error]);
 
     return (
-        <PageContentBlock title={'Account Activity Log'}>
-            <FlashMessageRender byKey={'account'} />
+        <>
             {(filters.filters?.event || filters.filters?.ip) && (
                 <div className={'flex justify-end mb-2'}>
                     <Link
@@ -67,6 +64,6 @@ export default () => {
                     onPageSelect={(page) => setFilters((value) => ({ ...value, page }))}
                 />
             )}
-        </PageContentBlock>
+        </>
     );
 };

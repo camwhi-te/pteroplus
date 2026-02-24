@@ -45,10 +45,18 @@ export default () => {
         <PageContentBlock title={'Account API'}>
             <FlashMessageRender byKey={'account'} />
             <div className={`md:flex flex-nowrap my-10`}>
-                <ContentBox title={'Create API Key'} className={`flex-none w-full md:w-1/2`}>
+                <ContentBox
+                    title={'Create API Key'}
+                    className={`flex-none w-full md:w-1/2`}
+                    description={'Make an API key in order to interact with the panel.'}
+                >
                     <CreateApiKeyForm onKeyCreated={(key) => setKeys((s) => [...s!, key])} />
                 </ContentBox>
-                <ContentBox title={'API Keys'} className={`flex-1 overflow-hidden mt-8 md:mt-0 md:ml-8`}>
+                <ContentBox
+                    title={'API Keys'}
+                    className={`flex-1 overflow-hidden mt-8 md:mt-0 md:ml-8`}
+                    description={'View all of your current API keys.'}
+                >
                     <SpinnerOverlay visible={loading} />
                     <Dialog.Confirm
                         title={'Delete API Key'}

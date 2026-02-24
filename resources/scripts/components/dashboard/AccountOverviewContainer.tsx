@@ -8,6 +8,7 @@ import { breakpoint } from '@/theme';
 import styled from 'styled-components/macro';
 import MessageBox from '@/components/MessageBox';
 import { useLocation } from 'react-router-dom';
+import ActivityLogContainer from './activity/ActivityLogContainer';
 
 const Container = styled.div`
     ${tw`flex flex-wrap`};
@@ -37,15 +38,28 @@ export default () => {
             )}
 
             <Container css={[tw`lg:grid lg:grid-cols-3 mb-10`, state?.twoFactorRedirect ? tw`mt-4` : tw`mt-10`]}>
-                <ContentBox title={'Update Password'} showFlashes={'account:password'}>
+                <ContentBox
+                    title={'Update Password'}
+                    showFlashes={'account:password'}
+                    description={'Keep your account secure by updating your password.'}
+                >
                     <UpdatePasswordForm />
                 </ContentBox>
                 <ContentBox
                     className={`mt-8 sm:mt-0 sm:ml-8`}
                     title={'Update Email Address'}
                     showFlashes={'account:email'}
+                    description={'Change the email address linked to your account.'}
                 >
                     <UpdateEmailAddressForm />
+                </ContentBox>
+                <ContentBox
+                    className={`mt-8 sm:mt-0 sm:ml-8`}
+                    title={'Account Activity'}
+                    showFlashes={'account:activity'}
+                    description={'View the latest changes to your account.'}
+                >
+                    <ActivityLogContainer />
                 </ContentBox>
             </Container>
         </PageContentBlock>

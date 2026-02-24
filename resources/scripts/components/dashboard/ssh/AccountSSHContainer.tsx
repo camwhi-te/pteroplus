@@ -28,10 +28,18 @@ export default () => {
         <PageContentBlock title={'SSH Keys'}>
             <FlashMessageRender byKey={'account'} />
             <div className={`md:flex flex-nowrap my-10`}>
-                <ContentBox title={'Add SSH Key'} className={`flex-none w-full md:w-1/2`}>
+                <ContentBox
+                    title={'Add SSH Key'}
+                    className={`flex-none w-full md:w-1/2`}
+                    description={'Use SSH keys to securely connect to servers.'}
+                >
                     <CreateSSHKeyForm />
                 </ContentBox>
-                <ContentBox title={'SSH Keys'} className={`flex-1 overflow-hidden mt-8 md:mt-0 md:ml-8`}>
+                <ContentBox
+                    title={'SSH Keys'}
+                    className={`flex-1 overflow-hidden mt-8 md:mt-0 md:ml-8`}
+                    description={'View all your active SSH keys.'}
+                >
                     <SpinnerOverlay visible={!data && isValidating} />
                     {!data || !data.length ? (
                         <p className={`text-center text-sm`}>

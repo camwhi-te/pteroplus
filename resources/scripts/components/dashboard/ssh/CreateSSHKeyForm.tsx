@@ -59,7 +59,7 @@ export default () => {
                             <Field name={'publicKey'} as={CustomTextarea} />
                         </FormikFieldWrapper>
                         <div className={`flex justify-end mt-6`}>
-                            <Button>Save</Button>
+                            <Button>Create</Button>
                         </div>
                     </Form>
                 )}
