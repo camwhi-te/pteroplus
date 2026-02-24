@@ -73,6 +73,11 @@
                                 <i class="fa fa-wrench"></i> <span>Settings</span>
                             </a>
                         </li>
+                        <li class="{{ ! starts_with(Route::currentRouteName(), 'admin.health') ?: 'active' }}">
+                            <a href="{{ route('admin.health')}}">
+                                <i class="fa fa-heartbeat"></i> <span>System Health</span>
+                            </a>
+                        </li>
                         <li class="header">MANAGEMENT</li>
                         <li class="{{ ! starts_with(Route::currentRouteName(), 'admin.databases') ?: 'active' }}">
                             <a href="{{ route('admin.databases') }}">
