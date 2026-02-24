@@ -102,25 +102,31 @@ export default () => {
                                         route.permission ? (
                                             <Can key={route.path} action={route.permission} matchAny>
                                                 <NavLink to={to(route.path, true)} exact={route.exact}>
+                                                    {route.icon && (
+                                                        <FontAwesomeIcon icon={route.icon} className={'mr-2'} />
+                                                    )}
                                                     {route.name}
                                                 </NavLink>
                                             </Can>
                                         ) : (
                                             <NavLink key={route.path} to={to(route.path, true)} exact={route.exact}>
+                                                {route.icon && <FontAwesomeIcon icon={route.icon} className={'mr-2'} />}
                                                 {route.name}
                                             </NavLink>
                                         )
                                     )}
                                 {rootAdmin && (
-                                    // eslint-disable-next-line react/jsx-no-target-blank
-                                    <a href={`/admin/servers/view/${serverId}`} target={'_blank'}>
-                                        Admin
-                                        <FontAwesomeIcon
-                                            icon={faExternalLinkAlt}
-                                            className={'ml-0.5 mb-1'}
-                                            size={'xs'}
-                                        />
-                                    </a>
+                                    <>
+                                        <div>&bull;</div>
+                                        <a href={`/admin/servers/view/${serverId}`} target={'_blank'} rel='noreferrer'>
+                                            Admin
+                                            <FontAwesomeIcon
+                                                icon={faExternalLinkAlt}
+                                                className={'ml-0.5 mb-1'}
+                                                size={'xs'}
+                                            />
+                                        </a>
+                                    </>
                                 )}
                                 {location.pathname !== `/server/${uuid.slice(0, 8)}` && navbar_controls[GET] && (
                                     <span className={'ml-auto flex'}>

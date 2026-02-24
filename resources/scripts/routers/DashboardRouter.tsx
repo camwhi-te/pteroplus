@@ -8,6 +8,7 @@ import SubNavigation from '@/components/elements/SubNavigation';
 import { useLocation } from 'react-router';
 import Spinner from '@/components/elements/Spinner';
 import routes from '@/routers/routes';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export default () => {
     const location = useLocation();
@@ -20,8 +21,9 @@ export default () => {
                     <div>
                         {routes.account
                             .filter((route) => !!route.name)
-                            .map(({ path, name, exact = false }) => (
+                            .map(({ path, name, exact = false, icon }) => (
                                 <NavLink key={path} to={`/account/${path}`.replace('//', '/')} exact={exact}>
+                                    {icon && <FontAwesomeIcon icon={icon} className={'mr-2'} />}
                                     {name}
                                 </NavLink>
                             ))}
