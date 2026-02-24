@@ -36,6 +36,8 @@ class AppServiceProvider extends ServiceProvider
             URL::forceScheme('https');
         }
 
+        URL::forceRootUrl(config('app.url'));
+
         Relation::enforceMorphMap([
             'allocation' => Models\Allocation::class,
             'api_key' => Models\ApiKey::class,
