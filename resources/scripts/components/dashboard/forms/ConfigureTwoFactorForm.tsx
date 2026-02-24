@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useStoreState } from 'easy-peasy';
 import { ApplicationStore } from '@/state';
-import { Button } from '@/components/elements/button/index';
 import SetupTOTPDialog from '@/components/dashboard/forms/SetupTOTPDialog';
 import RecoveryTokensDialog from '@/components/dashboard/forms/RecoveryTokensDialog';
 import DisableTOTPDialog from '@/components/dashboard/forms/DisableTOTPDialog';
 import { useFlashKey } from '@/plugins/useFlash';
+import Switch from '@/components/elements/Switch';
 
 export default () => {
     const [tokens, setTokens] = useState<string[]>([]);
@@ -24,22 +24,23 @@ export default () => {
         setVisible(null);
     };
 
+    const description = isEnabled
+        ? 'Use the switch to toggle two factor authentication off if you wish to remove it.'
+        : 'Use the switch to begin setting up two factor authentication on your account for added security.';
+
     return (
         <div>
             <SetupTOTPDialog open={visible === 'enable'} onClose={() => setVisible(null)} onTokens={onTokens} />
             <RecoveryTokensDialog tokens={tokens} open={tokens.length > 0} onClose={() => setTokens([])} />
             <DisableTOTPDialog open={visible === 'disable'} onClose={() => setVisible(null)} />
-            <p className={`text-sm`}>
-                {isEnabled
-                    ? 'Two-step verification is currently enabled on your account.'
-                    : 'You do not currently have two-step verification enabled on your account. Click the button below to begin configuring it.'}
-            </p>
-            <div className={`mt-6`}>
-                {isEnabled ? (
-                    <Button.Danger onClick={() => setVisible('disable')}>Disable Two-Step</Button.Danger>
-                ) : (
-                    <Button onClick={() => setVisible('enable')}>Enable Two-Step</Button>
-                )}
+            <div className={`bg-neutral-900 p-4 rounded-lg border border-neutral-500`}>
+                <Switch
+                    name='twoFactor'
+                    label='Two Factor Authentication'
+                    description={description}
+                    defaultChecked={isEnabled}
+                    onChange={() => setVisible(isEnabled ? 'disable' : 'enable')}
+                />
             </div>
         </div>
     );

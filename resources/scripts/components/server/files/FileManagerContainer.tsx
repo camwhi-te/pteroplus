@@ -20,9 +20,9 @@ import ErrorBoundary from '@/components/elements/ErrorBoundary';
 import { FileActionCheckbox } from '@/components/server/files/SelectFileCheckbox';
 import { hashToPath } from '@/helpers';
 import style from './style.module.css';
-import { usePersistedState } from '@/plugins/usePersistedState';
 import FileObjectGrid from './FileObjectGrid';
 import FileObjectRow from './FileObjectRow';
+import { GET, usePteroplusConfig, pteroplusSettings } from '@/plugins/usePteroplusConfig';
 
 const sortFiles = (files: FileObject[]): FileObject[] => {
     const sortedFiles: FileObject[] = files
@@ -32,7 +32,7 @@ const sortFiles = (files: FileObject[]): FileObject[] => {
 };
 
 export default () => {
-    const [gridFileManager, _] = usePersistedState<boolean>('pteroplus:gridFileManager', false);
+    const { grid_layout } = usePteroplusConfig(pteroplusSettings);
 
     const id = ServerContext.useStoreState((state) => state.server.data!.id);
     const { hash } = useLocation();
@@ -105,7 +105,7 @@ export default () => {
                                         </p>
                                     </div>
                                 )}
-                                {gridFileManager ? (
+                                {grid_layout[GET] ? (
                                     <div className={'grid grid-cols-2 gap-2 lg:grid-cols-8 lg:gap-4'}>
                                         {sortFiles(files.slice(0, 250)).map((file) => (
                                             <FileObjectGrid key={file.key} file={file} />

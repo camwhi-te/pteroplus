@@ -23,7 +23,7 @@ import routes from '@/routers/routes';
 import PowerButtons from '@/components/server/console/PowerButtons';
 import classNames from 'classnames';
 import FloatingConsole from '@/components/server/console/FloatingConsole';
-import { usePersistedState } from '@/plugins/usePersistedState';
+import { usePteroplusConfig, pteroplusSettings, GET } from '@/plugins/usePteroplusConfig';
 
 export function statusToColor(state?: ServerStatus): string {
     switch (state) {
@@ -45,7 +45,7 @@ export default () => {
 
     const rootAdmin = useStoreState((state) => state.user.data!.rootAdmin);
     const [error, setError] = useState('');
-    const [navbarControls, _] = usePersistedState<boolean>('pteroplus:navbarControls', true);
+    const { navbar_controls } = usePteroplusConfig(pteroplusSettings);
 
     const id = ServerContext.useStoreState((state) => state.server.data?.id);
     const uuid = ServerContext.useStoreState((state) => state.server.data?.uuid);
@@ -122,7 +122,7 @@ export default () => {
                                         />
                                     </a>
                                 )}
-                                {location.pathname !== `/server/${uuid.slice(0, 8)}` && navbarControls && (
+                                {location.pathname !== `/server/${uuid.slice(0, 8)}` && navbar_controls[GET] && (
                                     <span className={'ml-auto flex'}>
                                         <div className={'my-auto mr-2 bg-neutral-900 rounded-lg p-1.5'}>
                                             <FloatingConsole src={`/server/${uuid.slice(0, 8)}/console`} />

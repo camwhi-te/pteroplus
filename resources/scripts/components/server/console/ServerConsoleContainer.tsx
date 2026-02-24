@@ -15,12 +15,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircle } from '@fortawesome/free-solid-svg-icons';
 import classNames from 'classnames';
 import { statusToColor } from '@/routers/ServerRouter';
-import { usePersistedState } from '@/plugins/usePersistedState';
+import { usePteroplusConfig, pteroplusSettings, GET } from '@/plugins/usePteroplusConfig';
 
 export type PowerAction = 'start' | 'stop' | 'restart' | 'kill';
 
 const ServerConsoleContainer = () => {
-    const [simpleConsole, _] = usePersistedState<boolean>('pteroplus:simpleConsole', false);
+    const { simple_console } = usePteroplusConfig(pteroplusSettings);
 
     const name = ServerContext.useStoreState((state) => state.server.data!.name);
     const uuid = ServerContext.useStoreState((state) => state.server.data!.uuid);
@@ -49,7 +49,7 @@ const ServerConsoleContainer = () => {
                 </Alert>
             )}
             <div className={'grid grid-cols-4 gap-4 mb-4'}>
-                {!simpleConsole && (
+                {!simple_console[GET] && (
                     <>
                         <div className={'hidden sm:block h-full sm:col-span-2 lg:col-span-3 bg-black/50 rounded-xl'}>
                             <div className={'flex items-center h-full my-auto lg:px-4'}>
@@ -84,13 +84,13 @@ const ServerConsoleContainer = () => {
                     </Spinner.Suspense>
                 </div>
                 <ServerDetailsBlock className={'col-span-4 lg:col-span-1 order-last lg:order-none'} />
-                {simpleConsole && (
+                {simple_console[GET] && (
                     <Can action={['control.start', 'control.stop', 'control.restart']} matchAny>
                         <PowerButtons className={'flex sm:justify-end space-x-2'} />
                     </Can>
                 )}
             </div>
-            {!simpleConsole && (
+            {!simple_console[GET] && (
                 <div className={'grid grid-cols-1 md:grid-cols-3 gap-2 sm:gap-4'}>
                     <Spinner.Suspense>
                         <StatGraphs />
